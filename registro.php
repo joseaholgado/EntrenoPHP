@@ -9,7 +9,7 @@
 	<!-- Bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-	<link href="./css/estilos.css" rel="stylesheet" type="text/css" />
+	<link href="./css/estilosRegistro.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -79,7 +79,7 @@
 
 			<div class="row mt-2">
 				<div class="col">
-					<button class="btn" id="atras">Volver Atrás</button>
+					<button class="btn" id="atras"><a href="./login.php">Volver Atrás</a></button>
 					<button class="btn" id="enviar">Enviar Datos</button>
 				</div>
 			</div>
