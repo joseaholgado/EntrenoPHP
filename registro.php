@@ -79,7 +79,7 @@
 
 			<div class="row mt-2">
 				<div class="col">
-					<button class="btn" id="atras"><a href="./login.php">Volver Atrás</a></button>
+					<button type="button" class="btn" id="atras"><a href="./login.php">Volver Atrás</a></button>
 					<button class="btn" id="enviar">Enviar Datos</button>
 				</div>
 			</div>
