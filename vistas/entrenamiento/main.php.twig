@@ -1,0 +1,25 @@
+{% extends "plantilla.php.twig" %}
+
+{% block cuerpo %}
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for entrenamiento in datos %}		
+			<div class="col">
+				<div class="card shadow" style="width:18rem;">
+					<img src="{{ entrenamiento.imagen }}" class="card-img-top" />
+					<div class="card-body">
+						<h4 class="card-title">{{ entrenamiento.nombre|lower }}</h4>
+						ESTRELLITAS
+						<h6>{{ entrenamiento.musculo }}</h6>
+						<p class="card-text">{{ entrenamiento.explicacion }}</p>
+						<a href="info.php?id={{ entrenamiento.idEntrenamiento }}" class="btn btn-dark btn-sm">Mas info.</a>
+					</div>
+				</div>
+			</div>
+			
+		{% endfor %}
+		</div>
+{% endblock %}
+
+{% block pie %}
+Este es el nuevo pie
+{% endblock %}
