@@ -93,7 +93,7 @@
 			<div class="row mt-2">
 				<div class="col">
 					<button class="btn"><a href="./registro.php">Registrarse</a></button>
-                    <button class="btn">Enviar Datos</button>
+                    <button class="btn"><a href="index.php?m=entrenamiento&f=listado">Enviar Datos</a></button>
 				</div>
 			</div>
 			

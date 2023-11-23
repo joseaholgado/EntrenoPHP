@@ -1,17 +1,23 @@
 RewriteEngine on
 
 # Escribir una regla para el servidor apache que traduzca la URL
-# series/info/2
+# entrenamientos/info/2
 # En la URL real:
-# series/info.php?id=2
+# entrenamientos/info.php?id=2
 #
 # RewriteRule ^expresion_regular$ url_real [flags_opcionales]
 
-##RewriteRule ^./$ index.php?m=serie&f=listado
+##RewriteRule ^./$ index.php?m=entrenamiento&f=listado
 
 RewriteRule ^logout$ index.php?m=usuario&f=logout [L]
-RewriteRule ^main$ index.php?m=serie&f=listado [L]
+RewriteRule ^main$ index.php?m=entrenamiento&f=listado [L]
 RewriteRule ^usuario/eliminar/([1-9][0-9]*)$ index.php?m=usuario&f=eliminar&id=$1 [L]
+RewriteRule ^registro$ index.php?m=usuario&f=showregistro [L]
+RewriteRule ^index$ index.php [L]
+
+
+
+
 
 
 RewriteRule ^info/([1-9][0-9]*)$ info.php?id=$1 [L]

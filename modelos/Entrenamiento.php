@@ -64,35 +64,35 @@
         /**
          * @return string
          */
-        public function getnombre():string {
+        public function getNombre():string {
             return $this->nombre ;
         }
 
         /**
          * @return string
          */
-        public function getmusculo():string {
+        public function getMusculo():string {
             return $this->musculo ;
         }
 
         /**
          * @return string
          */
-        public function getexplicacion():string {
+        public function getExplicacion():string {
             return $this->explicacion ;
         }
 
         /**
          * @return string
          */
-        public function getimagen():string {
+        public function getImagen():string {
             return $this->imagen ;
         }
 
         /**
          * @return int
          */
-        public function getdificultad():int {
+        public function getDificultad():int {
             return floor($this->dificultad * 0.5) ;
         }
 
@@ -101,7 +101,7 @@
          */
         public function __toString():string {
 
-            $estrellas = estrellas($this->getdificultad()) ;
+            $estrellas = estrellas($this->getDificultad()) ;
             $explicacion = substr($this->explicacion, 0,50)."..." ;
 
             return "<div class=\"col\">
@@ -142,10 +142,10 @@
             $db = Conexion::getConnection() ; 
 
             // Realizamos la consulta 
-            $db->query("SELECT * FROM serie ; ") ;
+            $db->query("SELECT * FROM entrenamiento ; ") ;
 
             // Recuperamos los datos y los devolvemos en forma de array
-            return $db->getAll("Serie") ;
+            return $db->getAll("entrenamiento") ;
                     
         }
 

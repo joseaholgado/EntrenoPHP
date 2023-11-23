@@ -12,10 +12,10 @@
         public function listado() {
 
             // 1. Solicito al modelo todas las Entrenamientos.
-            $todasEntrenamientos = Entrenamiento::getAllEntrenamientos() ;
+            $todasEntrenamientos = Entrenamiento::getAllEntrenamiento() ;
 
             // 2. Mostramos la información que nos proporciona el modelo.
-            $this->render("Entrenamiento/main.php.twig", [ "datos" => $todasEntrenamientos, ]) ;
+            $this->render("usuario/main.php.twig", [ "datos" => $todasEntrenamientos, ]) ;
     
         }
 

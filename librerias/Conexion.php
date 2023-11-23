@@ -22,7 +22,7 @@
                 // - Contraseña
                 // - Nombre de la base de datos (opcional)
                 // - Puerto (opcional)
-                $this->db = new mysqli("db", "root", "", "entrenamiento") ;
+                $this->db = new mysqli("dbEntrenamiento", "root", "", "entrenamientos") ;
         
                 // Podemos comprobar si se ha producido un error
                 //if ($sqli->connect_errno)

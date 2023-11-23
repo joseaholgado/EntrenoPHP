@@ -31,7 +31,7 @@ CREATE TABLE `entrenamiento` (
   `idEntrenamiento` int NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `musculo` varchar(50) NOT NULL,
-  `explicación` text NOT NULL,
+  `explicación` varchar(255) NOT NULL,
   `imagen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `dificultad` decimal(10,6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -40,7 +40,7 @@ CREATE TABLE `entrenamiento` (
 -- Volcado de datos para la tabla `entrenamiento`
 --
 
-INSERT INTO `entrenamiento` (`idEntrenamiento`, `nombre`, `musculo`, `explicación`, `imagen`, `dificulta`) VALUES
+INSERT INTO `entrenamiento` (`idEntrenamiento`, `nombre`, `musculo`, `explicación`, `imagen`, `dificultad`) VALUES
 (1, 'Flexiones', 'Pecho',
 '1-Colócate en posición de plancha, manos ligeramente más anchas que los hombros, cuerpo recto.
 2-Baja tu cuerpo hacia el suelo doblando los codos.
@@ -90,7 +90,7 @@ INSERT INTO `entrenamiento` (`idEntrenamiento`, `nombre`, `musculo`, `explicaci�
 CREATE TABLE `usuario` (
   `idUsuario` int NOT NULL,
   `email` varchar(255) NOT NULL,
-  `pass` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `pass` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `apellido` varchar(150) NOT NULL,
   `foto` varchar(255) DEFAULT NULL

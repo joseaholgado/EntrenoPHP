@@ -28,8 +28,8 @@
          */
         public static function loginUsuario(string $email, string $password) {
 
-            $pass = md5($password) ;
-
+            $pass = password_hash($password, PASSWORD_DEFAULT);
+            
             return Conexion::getConnection()
                     ->query("SELECT * FROM usuario 
                              WHERE email='{$email}' AND pass='{$pass}' ;") 
@@ -44,6 +44,35 @@
             Conexion::getConnection()
                 ->query("DELETE FROM usuario WHERE idUsuario={$this->idUsuario};") ;
         }
+
+        // public function registrar(string $nombre, string $apellido, string $email, string $pass, string $passc) {
+        //     // Validación de contraseñas coincidentes
+        //     if ($pass != $passc) {
+        //         echo "Las contraseñas no coinciden. Vuelve e intenta de nuevo.";
+        //         exit(); // Terminamos el script si las contraseñas no coinciden
+        //     }
+        
+        //     // Encriptar la contraseña con password_hash()
+        //     $passwordHash = password_hash($pass, PASSWORD_DEFAULT);
+        
+        //     $conn = Conexion::getConnection();
+        
+        //     // Preparamos la consulta SQL para insertar los datos en la tabla correspondiente
+        //     $sql = "INSERT INTO usuario (nombre, apellido, email, pass) VALUES ('{$nombre}', '{$apellido}', '{$email}', '{$passwordHash}')";
+        
+        //     // Ejecutamos la consulta y verificamos el resultado
+        //     $resultado = $conn->query($sql);
+        
+        //     if ($resultado === TRUE) {
+        //         echo "Registro exitoso";
+        //     } else {
+        //         echo "Error al registrar usuario: " . $conn->error;
+        //     }
+        
+        //     // Cerramos la conexión
+        //     $conn->close();
+        // }
+        
 
         /*public function __sleep(): array {
             return ["nombre", "email"] ;
