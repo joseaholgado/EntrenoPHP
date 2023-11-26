@@ -3,7 +3,7 @@
 require_once "Controller.php";
 require_once "modelos/Usuario.php";
 require_once "librerias/libreria.php";
-
+require_once "MusculoController.php";
 class UsuarioController extends Controller
 {
 
@@ -30,10 +30,10 @@ class UsuarioController extends Controller
      */
     public function login()
     {
-
+       
         //  comprobar el token
-        // if ($_POST["_csrf"] != $_SESSION["_csrf"])
-        //     redireccion("http://localhost/proyectoPHP");
+        //  if ($_POST["_csrf"] != $_SESSION["_csrf"])
+        //      redireccion("http://localhost/proyectoPHP");
 
         //
         if ((empty($_POST["email"])) || (empty($_POST["pass"]))):
@@ -52,18 +52,51 @@ class UsuarioController extends Controller
         if (is_null($usuario)):
             // Hacemos una redirección al formulario de login indicando
             // que hay un error.
-
+            $this->render("usuario/login.php.twig");
             // TODO                
         endif;
-
+        
         // El usuario existe, por lo tanto lo redirigimos a la página
         // principal de la aplicación.
         $_SESSION["usuario"] = serialize($usuario);
         $_SESSION["inicio"] = time();
 
         //
-        $this->render("usuario/main.php.twig");
+         // Llamar a listado() en MusculoController y pasar los datos a la vista
+         $musculoController = new MusculoController();
+         $todosMusculos =$musculoController->listado();
+        
+        $this->render("usuario/main.php.twig", [ "datos" => $todosMusculos, ]);
 
+        // Comprobar si han pasado 30 segundos desde que se inició la sesión
+        $this->sesionExpirada();
+    }
+    public function sesionExpirada() {
+        $inactivo = 15; // Tiempo de inactividad en segundos
+    
+        // Iniciar la sesión si no está iniciada
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+    
+        // Comprobar si han pasado 30 segundos desde que se inició la sesión
+        if (isset($_SESSION['inicio']) && (time() - $_SESSION['inicio'] > $inactivo)) {
+            // La sesión ha expirado, cerrar la sesión
+            session_unset();
+            session_destroy();
+    
+            // Redirigir al formulario de login
+            header("usuario/login.php.twig");
+            exit();
+        }
+    
+        // Actualizar la marca de tiempo de inicio de la sesión
+        $_SESSION['inicio'] = time();
+    }
+    public function cerrarSesion(){
+        session_unset();
+        session_destroy();
+        $this->render("usuario/login.php.twig");
     }
    
 
@@ -72,7 +105,7 @@ class UsuarioController extends Controller
     public function eliminar()
     {
 
-        $id = $_GET["id"];
+        $id = $_POST["idUsuario"];
         $usuario = Usuario::getUsuario($id);
         echo "BORRADO!!!!";
         $usuario->borrar();    // TELL DON'T ASK

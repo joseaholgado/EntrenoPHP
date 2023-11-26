@@ -2,6 +2,7 @@
 
     // importamos la librería TWIG
     require_once "vendor/autoload.php" ;
+    require_once "librerias/TwigExtensions.php" ;
 
     abstract class Controller {
 
@@ -12,9 +13,11 @@
             // Configuramos la librería Twig indicándole la ruta hasta la
             // carpeta donde tenemos todas las vistas.
             $loader = new \Twig\Loader\FilesystemLoader("vistas") ;
-        
+
             // Instanciamos la librería Twig
             $this->twig = new \Twig\Environment($loader) ;
+
+            $this->twig->addExtension(new TwigExtensions) ;
         }
 
         /**

@@ -26,14 +26,31 @@
          /**
          * @return Usuario
          */
-        public static function loginUsuario(string $email, string $password) {
+        // public static function loginUsuario(string $email, string $password) {
 
-            $pass = password_hash($password, PASSWORD_DEFAULT);
+        //     $pass = password_hash($password, PASSWORD_DEFAULT);
             
-            return Conexion::getConnection()
-                    ->query("SELECT * FROM usuario 
-                             WHERE email='{$email}' AND pass='{$pass}' ;") 
-                    ->getRow("Usuario") ;   
+        //     return Conexion::getConnection()
+        //             ->query("SELECT * FROM usuario 
+        //                      WHERE email='{$email}' AND pass='{$pass}' ;") 
+        //             ->getRow("Usuario") ;   
+        // }
+        public static function loginUsuario(string $email, string $password) {
+            // Buscar al usuario por su correo electrónico
+            $user = Conexion::getConnection()
+                ->query("SELECT * FROM usuario WHERE email='{$email}'")
+                ->getRow("Usuario");
+        
+            if ($user) {
+                // Si se encuentra el usuario, verificar la contraseña
+                if (password_verify($password, $user->pass)) {
+                    // La contraseña es correcta, devolver el usuario
+                    return $user;
+                }
+            }
+        
+            // Usuario no encontrado o contraseña incorrecta
+            return null;
         }
 
         /**

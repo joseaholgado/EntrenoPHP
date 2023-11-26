@@ -119,21 +119,21 @@
         }
 
         /**
-         * Recupera información sobre una determinada serie
+         * Recupera información sobre una determinada Entrenamiento
          * @param int $idEntrenamiento
          * @return Entrenamiento
          */
-        public static function getEntrenamiento(int $idEntrenamiento):Serie 
+        public static function getEntrenamiento(int $idEntrenamiento):Entrenamiento 
         {            
             // Podemos encadenar llamadas a métodos tras utilizar
             // métodos que devuelvan la instancia de la clase Conexion.
             return Conexion::getConnection()
-                        ->query("SELECT * FROM serie WHERE idEntrenamiento={$idEntrenamiento} ;")
-                        ->getRow("Serie") ;            
+                        ->query("SELECT * FROM Entrenamiento WHERE idEntrenamiento={$idEntrenamiento} ;")
+                        ->getRow("Entrenamiento") ;            
         }
 
         /**
-         * Recupera información sobre todas las series
+         * Recupera información sobre todas las Entrenamientos
          * @return array
          */
         public static function getAllEntrenamiento(): array {

@@ -2,16 +2,15 @@
 
 {% block cuerpo %}
 		<div class="row row-cols-1 row-cols-md-3 g-4">
-        {% for entrenamiento in datos %}		
+        {% for musculo in datos %}		
 			<div class="col">
 				<div class="card shadow" style="width:18rem;">
-					<img src="{{ entrenamiento.imagen }}" class="card-img-top" />
+					<img src="{{ musculo.imagen_musculo }}" class="card-img-top" />
 					<div class="card-body">
-						<h4 class="card-title">{{ entrenamiento.musculo|upper }}</h4>
-						<h6>DIFICULTAD: {{ entrenamiento.dificultad }}</h6>
-						<h6>{{ entrenamiento.nombre }}</h6>
-						<p class="card-text">{{ entrenamiento.explicacion }}</p>
-						<a href="info.php?id={{ entrenamiento.idEntrenamiento }}" class="btn btn-dark btn-sm">Mas info.</a>
+						<h4 class="card-title">{{ musculo.nombre|upper }}</h4>
+						
+						<a  href="info.php?id={{ musculo.idMusculo }}" class="btn btn-dark btn-sm"
+						 style="display: flex; flex-direction: column; align-items: center" >Mas info+</a>
 					</div>
 				</div>
 			</div>

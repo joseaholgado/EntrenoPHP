@@ -109,6 +109,17 @@ header{
     color: var(--bs-card-title-color);
 
 }
+.card-body{
+    flex: 1 1 auto;
+    padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
+    color: var(--bs-card-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
 p{
     margin-bottom: 0;
   font-family: 'Poppins', sans-serif; /* Usar la fuente Poppins */

@@ -26,16 +26,16 @@ SET time_zone = "+00:00";
 --
 -- Estructura de tabla para la tabla `Musculo`
 --
-  CREATE TABLE `Musculos` (
+  CREATE TABLE `musculo` (
     idMusculo INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     imagen_musculo VARCHAR(200)
 );
 
 --
--- Volcado de datos para la tabla `Musculos`
+-- Volcado de datos para la tabla `musculo`
 --
-INSERT INTO Musculos (nombre, imagen_musculo) VALUES 
+INSERT INTO musculo (nombre, imagen_musculo) VALUES 
     ('Pecho', './img/pecho.png'),
     ('Dorsales', './img/dorsales.png'),
     ('Hombros', './img/hombros.png'),
@@ -53,7 +53,7 @@ CREATE TABLE `entrenamiento` (
   `explicacion` TEXT NOT NULL,
   `imagen_ejercicio` VARCHAR(255) DEFAULT NULL,
   `dificultad` DECIMAL(10, 6) NOT NULL,
-  FOREIGN KEY (`musculo_id`) REFERENCES `Musculos`(`idMusculo`) -- Cambié el nombre de la columna referenciada
+  FOREIGN KEY (`musculo_id`) REFERENCES `musculo`(`idMusculo`) -- Cambié el nombre de la columna referenciada
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
