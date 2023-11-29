@@ -9,6 +9,7 @@ RewriteEngine on
 
 ##RewriteRule ^./$ index.php?m=entrenamiento&f=listado
 
+RewriteRule ^$ index.php?m=usuario&f=showLogin [L]
 RewriteRule ^logout$ index.php?m=usuario&f=logout [L]
 RewriteRule ^main$ index.php?m=musculo&f=listado [L]
 RewriteRule ^usuario/eliminar/([1-9][0-9]*)$ index.php?m=usuario&f=eliminar&id=$1 [L]

@@ -1,6 +1,8 @@
 <?php
     require_once "Controller.php" ;
     require_once "modelos/Entrenamiento.php" ;
+    require_once "librerias/libreria.php" ;
+    
 
     class EntrenamientoController extends Controller {
 
@@ -17,6 +19,12 @@
             // 2. Mostramos la información que nos proporciona el modelo.
             $this->render("usuario/main.php.twig", [ "datos" => $todasEntrenamientos, ]) ;
     
+        }
+
+        public function listadoEjercicio(){
+            
+            $todasEntrenamientos = Entrenamiento::getEntrenamientosByMusculo($_GET['id']) ;
+            $this->render("usuario/mainEjercicios.php.twig", [ "entrenamientos" => $todasEntrenamientos]) ;
         }
 
         /**

@@ -2,7 +2,7 @@
 
     // importamos la librería TWIG
     require_once "vendor/autoload.php" ;
-    require_once "librerias/TwigExtensions.php" ;
+    require_once "extensiones/TwigSessionExtension.php" ;
 
     abstract class Controller {
 
@@ -15,9 +15,10 @@
             $loader = new \Twig\Loader\FilesystemLoader("vistas") ;
 
             // Instanciamos la librería Twig
-            $this->twig = new \Twig\Environment($loader) ;
+            $this->twig = new \Twig\Environment($loader, [ "debug" => true]) ;
 
-            $this->twig->addExtension(new TwigExtensions) ;
+            $this->twig->addExtension(new \Twig\Extension\DebugExtension) ;
+            $this->twig->addExtension(new TwigSessionExtension) ;
         }
 
         /**
@@ -29,5 +30,6 @@
         public function render(string $vista, array $datos = []) {
             echo $this->twig->render($vista, $datos) ;
         }
+        
 
     }

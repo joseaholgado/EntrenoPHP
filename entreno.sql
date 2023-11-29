@@ -36,11 +36,11 @@ SET time_zone = "+00:00";
 -- Volcado de datos para la tabla `musculo`
 --
 INSERT INTO musculo (nombre, imagen_musculo) VALUES 
-    ('Pecho', './img/pecho.png'),
-    ('Dorsales', './img/dorsales.png'),
-    ('Hombros', './img/hombros.png'),
+    ('Pecho', './img/pecho.jpg'),
+    ('Dorsales', './img/dorsales.jpg'),
+    ('Hombros', './img/hombros.jpg'),
     ('Piernas', './img/piernas.png'),
-    ('Brazos', './img/brazos.png');
+    ('Brazos', './img/brazos.jpg');
   
 
 --

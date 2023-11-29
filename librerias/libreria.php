@@ -7,6 +7,9 @@
 
 	define("MAX_ESTRELLAS", 5) ;
 
+    function show($v){
+        echo "<pre>".print_r($v,true)."</pre>";
+    };
 
     /**	 
      * Redirige a la URL indicada

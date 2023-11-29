@@ -1,6 +1,8 @@
 <?php
 
     require_once "librerias/Conexion.php" ;
+    require_once "modelos/Usuario.php" ;
+    require_once "modelos/Entrenamiento.php" ;
 
     class Entrenamiento {
 
@@ -132,6 +134,18 @@
                         ->getRow("Entrenamiento") ;            
         }
 
+
+        public static function getEntrenamientosByMusculo(string $nombreEntrenamiento):array 
+        {             
+           //var_dump($_GET['id']);
+           // show($nombreEntrenamiento);
+           
+            // Podemos encadenar llamadas a métodos tras utilizar
+            // métodos que devuelvan la instancia de la clase Conexion.
+            return Conexion::getConnection()
+                        ->query("SELECT e.* FROM entrenamiento e JOIN musculo m ON e.musculo_id = m.idMusculo WHERE m.nombre = '$nombreEntrenamiento'")
+                        ->getAll("entrenamiento") ;            
+        }
         /**
          * Recupera información sobre todas las Entrenamientos
          * @return array

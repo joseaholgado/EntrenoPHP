@@ -1,5 +1,7 @@
 <?php
 
+    require_once "modelos/Usuario.php" ;
+
     session_start() ;
 
     // Tenemos que indicarle al controlador frontal (index.php)
@@ -13,6 +15,7 @@
 
     $que   = $_GET["f"]??$_POST["f"]??"showLogin" ;   // Función a realizar con el controlador|modelo
     $quien = $_GET["m"]??$_POST["m"]??"usuario"   ;   // Serie, Usuario, Genero, Pelicula, etc...
+
 
     // "Construimos" el nombre del controlador con el que vamos
     // a trabajar.

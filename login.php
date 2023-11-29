@@ -32,7 +32,7 @@
 			//$usuario = new Usuario("Bruce", "Wayne", "bruce@wayne.com") ;
 			$usuario = $result->fetch_object("Usuario") ;
 
-			$_SESSION["usuario"] = serialize($usuario) ;
+			$_SESSION["usuario"] = $usuario ;
 			$_SESSION["inicio"]  = time() ;
 
 			//
