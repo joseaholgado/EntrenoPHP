@@ -142,11 +142,12 @@ class UsuarioController extends Controller
     }
 
     public function registro()
-    {
+    { 
+       
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Validación de datos
             // ... (validar campos, contraseñas, etc.)
-
+            
             $nombre = $_POST['nombre'];
             $apellido = $_POST['apellido'];
             $email = $_POST['email'];
@@ -170,7 +171,7 @@ class UsuarioController extends Controller
             $contrasena_encriptada = password_hash($pass, PASSWORD_DEFAULT);
             // Crear instancia de Usuario y llamar al método de registro
             $usuario = new Usuario();
-            $registroExitoso = $usuario->registrarUsuario($nombre, $apellido, $email, $contrasena_encriptada);
+            $registroExitoso = $usuario->registrarUsuario($nombre, $apellido, $email, $contrasena_encriptada, );
 
             if ($registroExitoso) {
                 echo "Registro exitoso";
@@ -180,6 +181,59 @@ class UsuarioController extends Controller
                 // Mostrar mensaje de error
             }
         }
+    }
+    public function modificarUsuario(){
+        $idUsuario = $_POST["idUsuario"];
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Validación de datos
+            // ... (validar campos, contraseñas, etc.)
+            var_dump($_POST) ;
+            $nombre = $_POST['nombre'];
+            $apellido = $_POST['apellido'];
+            $email = $_POST['email'];
+            $pass = $_POST['pass'];
+            $passc = $_POST['passc'];
+
+            // Validar contraseñas coincidentes, longitud, etc.
+            // Validación de contraseñas coincidentes
+            if ($pass != $passc) {
+                echo "Las contraseñas no coinciden. Vuelve e intenta de nuevo.";
+                exit(); // Terminamos el script si las contraseñas no coinciden
+            }
+            // Verificar si la contraseña es demasiado larga
+            $max_longitud = 30; // Establecer la longitud máxima deseada
+            if (strlen($pass) > $max_longitud) {
+
+                $pass = substr($pass, 0, $max_longitud); // Truncar la contraseña si es demasiado larga
+            }
+
+            // Encriptar la contraseña antes de almacenarla en la base de datos
+            $contrasena_encriptada = password_hash($pass, PASSWORD_DEFAULT);
+            // Crear instancia de Usuario y llamar al método de registro
+            $usuario = new Usuario();
+            $registroExitoso = $usuario->actualizarUsuario($nombre, $apellido, $email, $contrasena_encriptada, $idUsuario);
+
+            if ($registroExitoso) {
+                echo "Registro exitoso";
+                // Redireccionar o mostrar mensaje de éxito
+            } else {
+                echo "Error al registrar usuario";
+                // Mostrar mensaje de error
+            }
+        }
+    }
+    public function showModificarUsuario()
+    {
+
+        // Generamos el token para protección CSRF
+        $token = md5(uniqid(mt_rand()));
+
+        // Guardamos el token en la sesión
+        $_SESSION["_csrf"] = $token;
+
+        // Cargamos la vista de registro y le pasamos el token
+        $this->render("usuario/modificarUsuario.php.twig", ["token" => $token]);
+        //rederizar hace que me muestre la pagina html al cliente
     }
 
 

@@ -1,6 +1,8 @@
 
 body {
     background-color: #010101;
+    background-image: url("img/fondo.png");
+    background-position: center;
 }
 .header{
     font-family: 'Outfif', sans-serif;

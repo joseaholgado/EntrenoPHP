@@ -8,10 +8,9 @@
 				<div class="card shadow" style="width:18rem;">
 					<img src="{{ entrenamiento.imagen_ejercicio }}" class="card-img-top" />
 					<div class="card-body">
-						<h4 class="card-title">{{ entrenamiento.musculo|upper }}</h4>
+						<h4 class="card-title">{{ entrenamiento.nombre|upper }}</h4>
 						<h6>DIFICULTAD: {{ entrenamiento.dificultad }}</h6>
-						<h6>{{ entrenamiento.nombre }}</h6>
-						<p class="card-text">{{ entrenamiento.explicacion }}</p>
+						{# <p class="card-text">{{ entrenamiento.explicacion }}</p> #}
 						<a href="info.php?id={{ entrenamiento.idEntrenamiento }}" class="btn btn-dark btn-sm">Mas info.</a>
 					</div>
 				</div>
@@ -22,5 +21,5 @@
 {% endblock %}
 
 {% block pie %}
-Este es el nuevo pie
+
 {% endblock %}

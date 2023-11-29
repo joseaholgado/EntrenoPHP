@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
+	<title>AtomGym-Main</title>
     <!-- Fuentes google -->
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100&family=Poppins:wght@200&display=swap" rel="stylesheet">
 
@@ -28,7 +28,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" >Inicio</a>
+          <a class="nav-link active" aria-current="page" href="index" >Inicio</a>
         </li>
        
         <li class="nav-item dropdown">
@@ -44,7 +44,7 @@
           </ul>
         </li>
         <li class="nav-item">       
-        <a class="nav-link disabled" aria-disabled="true">Usuario {{ _session.usuario.nombre }}</a>
+        <a class="nav-link disabled" aria-disabled="true">Bienvenido usuario: {{ _session.usuario.nombre }}</a>
         </li>
       </ul>
       <form action="cerrarSesion" role="POST">
@@ -53,14 +53,23 @@
 			<input type="hidden" name="f" value="login" />
       <button class="btn btn-outline-success" type="submit" >Cerrar sesión</button>
       </form>
+
       <form action="eliminarCuenta" method="POST">
       <input type="hidden" name="_csrf" value="{{ token }}" />
 			<input type="hidden" name="m" value="usuario" />
 			<input type="hidden" name="f" value="eliminar" />
        <input type="hidden" name="idUsuario" value="{{ _session.usuario.idUsuario }}" />
-        <button class="btn btn-outline-success" type="submit">Eliminar cuenta</button>
-        
+        <button class="btn btn-outline-success" type="submit">Eliminar cuenta</button>        
       </form>
+
+      <form action="modificarUsuario" method="POST">
+      <input type="hidden" name="_csrf" value="{{ token }}" />
+			<input type="hidden" name="m" value="usuario" />
+			<input type="hidden" name="f" value="showModificarUsuario" />
+       <input type="hidden" name="idUsuario" value="{{ _session.usuario.idUsuario }}"/>
+        <button class="btn btn-outline-success" type="submit" >Modificar cuenta</button>  
+      </form>
+
     </div>
   </div>
 </nav>

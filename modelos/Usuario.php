@@ -58,7 +58,7 @@ class Usuario
             ->getRow("Usuario");
 
         if ($user) {
-            
+
 
             // Si se encuentra el usuario, verificar la contraseña
             if (password_verify($password, $user->pass)) {
@@ -98,5 +98,40 @@ class Usuario
         // Cerrar statement y retornar resultado de la inserción
         $stmt->close();
         return $registroExitoso;
+    }
+
+    public function actualizarUsuario($nombre, $apellido, $email, $pass, $idUsuario)
+    {
+        // Crear conexión utilizando el patrón Singleton
+        $conexion = Conexion::getConnection();
+
+        // Validación de datos y sentencia preparada para actualización
+        $sql = "UPDATE usuario SET nombre = ?, apellido = ?, email = ?, pass = ? WHERE idUsuario = ?";
+        $stmt = $conexion->prepare($sql);
+
+        // Verificar si la preparación de la consulta fue exitosa
+        if ($stmt) {
+            // Vincular parámetros
+            $stmt->bind_param("ssssi", $nombre, $apellido, $email, $pass, $idUsuario);
+
+            // Ejecutar la consulta
+            $registroExitoso =$stmt->execute();
+
+            // Verificar si la actualización fue exitosa
+            if ($stmt->affected_rows > 0) {
+                echo "¡Datos actualizados correctamente!";
+            } else {
+                echo "No se pudo actualizar los datos. Verifica los valores proporcionados.";
+            }
+
+            // Cerrar la sentencia
+            $stmt->close();
+        } else {
+            echo "Error al preparar la consulta.";
+        }
+
+        return $registroExitoso;
+
+
     }
 }

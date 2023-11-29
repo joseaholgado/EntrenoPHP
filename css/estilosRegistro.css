@@ -1,5 +1,6 @@
 body {
     background-color: #010101;
+   
 }
 .header{
     font-family: 'Outfif', sans-serif;
@@ -29,6 +30,7 @@ label {
     width: 30%;
     display: flex;
     justify-content:space-between;
+    /* padding-bottom: 2%; */
 }
 
 .btn {
@@ -55,7 +57,12 @@ a{
     width: 35%;
 }
 
-    img {
+img {
     
         width: 140%;
     }
+    .alerta {
+        padding-top: 3%;
+        /* Resto de tus estilos personalizados */
+    }
+    

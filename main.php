@@ -36,7 +36,7 @@
 
 	 }) ;
 
-	 echo "<h1>HJola mundo!</h1>" ;
+
 
 	 // Configuramos la librería Twig indicándole la ruta hasta la
 	 // carpeta donde tenemos todas las vistas.

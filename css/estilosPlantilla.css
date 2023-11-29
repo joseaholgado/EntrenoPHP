@@ -1,5 +1,7 @@
-#body{
+body{
     background-color: black;
+    background-image: url("./img/brazos.jpg");
+    background-position: center;
 }
 header{
     margin-bottom: 10px;

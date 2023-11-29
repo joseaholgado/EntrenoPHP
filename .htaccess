@@ -16,6 +16,8 @@ RewriteRule ^usuario/eliminar/([1-9][0-9]*)$ index.php?m=usuario&f=eliminar&id=$
 RewriteRule ^registro$ index.php?m=usuario&f=showregistro [L]
 RewriteRule ^index$ index.php [L]
 RewriteRule ^eliminarCuenta$ index.php?m=usuario&f=eliminar [L]
+RewriteRule ^modificarUsuario$ index.php?m=usuario&f=showModificarUsuario [L]
+RewriteRule ^modificarUsuarioDatos$ index.php?m=usuario&f=modificarUsuario [L]
 RewriteRule ^cerrarSesion$ index.php?m=usuario&f=cerrarSesion [L]
 
 
