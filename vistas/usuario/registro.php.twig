@@ -26,21 +26,31 @@
                 document.getElementById('alerta').classList.remove('d-none');
                 event.preventDefault(); // Previene que el formulario se envíe si hay campos vacíos
             }
-        });
-		 // Para cerrar el alerta
+			if (pass != passc) {
+				document.getElementById('alertaPass').classList.remove('d-none');
+				event.preventDefault(); // Previene que el formulario se envíe si las contraseñas no coinciden
+			}
+		});
+		// Para cerrar el alerta
             var alerta = document.getElementById('alerta');
             alerta.querySelector('.btn-close').addEventListener('click', function() {
                 alerta.classList.add('d-none');
             });
-    });
+			var alertaPass = document.getElementById('alertaPass');
+            alertaPass.querySelector('.btn-close').addEventListener('click', function() {
+                alertaPass.classList.add('d-none');
+            });
+        });
+		 
 </script>
 </head>
 
 <body>
 
+		  
 	<div class="container">
 
-		<form action="index" method="POST" ><!--Direccion de la siguiuente pagina-->
+		<form action="registroUsuario" method="POST" ><!--Direccion de la siguiuente pagina-->
 
 			<input type="hidden" name="_csrf" value="{{ token }}" />
 			<input type="hidden" name="m" value="usuario" />
@@ -120,7 +130,15 @@
             </div>
 			</div>
 
+			<div class="alertaPass">
+            <div class="alert alert-danger alert-dismissible fade show d-none" id="alertaPass" role="alert">
+                Las contraseñas no coinciden, repita.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+			</div>
+
 		</form>
+		
 		<div class="img">
 			<img src="./img/registro.png"></img>
 		</div>

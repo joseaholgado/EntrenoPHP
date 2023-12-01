@@ -69,13 +69,14 @@ header{
     margin-top: 10px;
   }
   
-  .container {
+  .contenedorFooter {
     width: 100%;
     margin-right: auto;
     margin-left: auto;
     padding-right: 15px;
     padding-left: 15px;
   }
+
   
   .row {
     display: flex;
@@ -93,7 +94,7 @@ header{
   
   #nombre {
     margin-bottom: 0;
-    text-align: center;
+    
   }
 #atom{
     margin-left: 7%;

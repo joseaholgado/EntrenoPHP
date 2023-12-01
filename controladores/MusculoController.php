@@ -13,9 +13,9 @@
 
             // 1. Solicito al modelo todas las Musculos.
              $todosMusculos = Musculo::getAllMusculo() ;
-             return $todosMusculos;
+             //return $todosMusculos;
             // 2. Mostramos la información que nos proporciona el modelo.
-            // $this->render("usuario/main.php.twig", [ "datos" => $todosMusculos, ]) ;
+            $this->render("usuario/main.php.twig", [ "musculos" => $todosMusculos, ]) ;
             
         }
 

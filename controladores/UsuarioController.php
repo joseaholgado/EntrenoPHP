@@ -53,12 +53,11 @@ class UsuarioController extends Controller
 
         if (is_null($usuario)):
 
-            // Iniciar la sesión y almacenar datos del usuario en la sesión
+             // Usuario no encontrado en la base de datos, se establece un mensaje de error
+        $mensajeError = "El usuario o la contraseña<br> proporcionados son incorrectos.";
 
-
-            // Hacemos una redirección al formulario de login indicando
-            // que hay un error.
-            $this->render("usuario/login.php.twig");
+        // Se renderiza la vista de login con el mensaje de error
+        $this->render("usuario/login.php.twig", ["mensajeError" => $mensajeError]);
             exit();
             // TODO                
         endif;
@@ -76,7 +75,7 @@ class UsuarioController extends Controller
         // Llamar a listado() en MusculoController y pasar los datos a la vista
         $musculoController = new MusculoController();
         $todosMusculos = $musculoController->listado();
-        $this->render("usuario/main.php.twig", ["musculos" => $todosMusculos,]);
+        // $this->render("usuario/main.php.twig", ["musculos" => $todosMusculos,]);
 
         // Comprobar si han pasado 30 segundos desde que se inició la sesión
         $this->sesionExpirada();
@@ -108,6 +107,7 @@ class UsuarioController extends Controller
     {
         session_unset();
         session_destroy();
+        
         header("location: http://localhost/proyectoPHP") ;
     }
 
@@ -157,7 +157,8 @@ class UsuarioController extends Controller
             // Validar contraseñas coincidentes, longitud, etc.
             // Validación de contraseñas coincidentes
             if ($pass != $passc) {
-                echo "Las contraseñas no coinciden. Vuelve e intenta de nuevo.";
+                $mensajeError= "Las contraseñas no coinciden. Vuelve e intentarlo de nuevo.";
+                $this->render("usuario/registro.php.twig", ["mensajeError" => $mensajeError]);
                 exit(); // Terminamos el script si las contraseñas no coinciden
             }
             // Verificar si la contraseña es demasiado larga
@@ -174,20 +175,22 @@ class UsuarioController extends Controller
             $registroExitoso = $usuario->registrarUsuario($nombre, $apellido, $email, $contrasena_encriptada, );
 
             if ($registroExitoso) {
-                echo "Registro exitoso";
+                $mensaje= "Te has registrado con éxito";
                 // Redireccionar o mostrar mensaje de éxito
+                $this->render("usuario/login.php.twig", ["mensaje" => $mensaje]);
             } else {
-                echo "Error al registrar usuario";
                 // Mostrar mensaje de error
+                $mensajeError= "Error al registrar al usuario";              
+                $this->render("usuario/registro.php.twig", ["mensajeError" => $mensajeError]);
             }
         }
     }
     public function modificarUsuario(){
+      
         $idUsuario = $_POST["idUsuario"];
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Validación de datos
             // ... (validar campos, contraseñas, etc.)
-            var_dump($_POST) ;
             $nombre = $_POST['nombre'];
             $apellido = $_POST['apellido'];
             $email = $_POST['email'];
@@ -197,7 +200,15 @@ class UsuarioController extends Controller
             // Validar contraseñas coincidentes, longitud, etc.
             // Validación de contraseñas coincidentes
             if ($pass != $passc) {
-                echo "Las contraseñas no coinciden. Vuelve e intenta de nuevo.";
+                $mensajeError= "Las contraseñas no coinciden. Vuelve e intenta de nuevo.";
+                $this->render("usuario/modificarUsuario.php.twig", ["mensajeError" => $mensajeError]);
+                exit(); // Terminamos el script si las contraseñas no coinciden
+            }
+
+            //Verificar si los campos no estan vacios
+            if ($nombre === '' || $apellido === '' || $email === '' || $pass === '' || $passc === '') {
+                $mensajeError= "No puede haber  campos vacios";
+                $this->render("usuario/modificarUsuario.php.twig", ["mensajeError" => $mensajeError]);
                 exit(); // Terminamos el script si las contraseñas no coinciden
             }
             // Verificar si la contraseña es demasiado larga
@@ -214,10 +225,13 @@ class UsuarioController extends Controller
             $registroExitoso = $usuario->actualizarUsuario($nombre, $apellido, $email, $contrasena_encriptada, $idUsuario);
 
             if ($registroExitoso) {
-                echo "Registro exitoso";
+                $mensaje= "Registro exitoso";
+                  // Cargamos la vista de registro y le pasamos el mensaje
+                  $this->render("usuario/modificarUsuario.php.twig", ["mensaje" => $mensaje]);
                 // Redireccionar o mostrar mensaje de éxito
             } else {
-                echo "Error al registrar usuario";
+                $mensajeError= "Error al registrar usuario";
+                $this->render("usuario/modificarUsuario.php.twig", ["mensajeError" => $mensajeError]);
                 // Mostrar mensaje de error
             }
         }

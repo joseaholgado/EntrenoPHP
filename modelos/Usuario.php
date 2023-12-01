@@ -66,7 +66,7 @@ class Usuario
                 return $user;
             }
         }
-
+        
         // Usuario no encontrado o contraseña incorrecta
         return null;
     }
@@ -117,12 +117,7 @@ class Usuario
             // Ejecutar la consulta
             $registroExitoso =$stmt->execute();
 
-            // Verificar si la actualización fue exitosa
-            if ($stmt->affected_rows > 0) {
-                echo "¡Datos actualizados correctamente!";
-            } else {
-                echo "No se pudo actualizar los datos. Verifica los valores proporcionados.";
-            }
+           
 
             // Cerrar la sentencia
             $stmt->close();
