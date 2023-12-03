@@ -2,6 +2,7 @@
 
 require_once "Controller.php";
 require_once "modelos/Usuario.php";
+require_once "modelos/Administrador.php";
 require_once "librerias/libreria.php";
 require_once "MusculoController.php";
 require_once "extensiones/TwigSessionExtension.php";
@@ -118,7 +119,7 @@ class UsuarioController extends Controller
     {
       
 
-
+        show( $_GET["idUsuario"]);
         $id = $_POST["idUsuario"];
         $usuario = Usuario::getUsuario($id);
         $usuario->borrar();    // TELL DON'T ASK
@@ -143,47 +144,64 @@ class UsuarioController extends Controller
 
     public function registro()
     { 
-       
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Validación de datos
-            // ... (validar campos, contraseñas, etc.)
+        
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                // Validación de datos
+                // ... (validar campos, contraseñas, etc.)
+                
+                $nombre = $_POST['nombre'];
+                $apellido = $_POST['apellido'];
+                $email = $_POST['email'];
+                $pass = $_POST['pass'];
+                $passc = $_POST['passc'];
+
+                // Validar contraseñas coincidentes, longitud, etc.
+                // Validación de contraseñas coincidentes
+                if ($pass != $passc) {
+                    $mensajeError= "Las contraseñas no coinciden. Vuelve e intentarlo de nuevo.";
+                    $this->render("usuario/registro.php.twig", ["mensajeError" => $mensajeError]);
+                    exit(); // Terminamos el script si las contraseñas no coinciden
+                }
+                if ($nombre === '' || $apellido === '' || $email === '' || $pass === '' || $passc === '') {
+                    $mensajeError= "No puede haber campos vacios";
+                    $this->render("usuario/registro.php.twig", ["mensajeError" => $mensajeError]);
+                    exit(); // Terminamos el script si las contraseñas no coinciden
+                }
+                // Verificar si la contraseña es demasiado larga
+                $max_longitud = 30; // Establecer la longitud máxima deseada
+                if (strlen($pass) > $max_longitud) {
+
+                    $pass = substr($pass, 0, $max_longitud); // Truncar la contraseña si es demasiado larga
+                }
+
+                // Encriptar la contraseña antes de almacenarla en la base de datos
+                $contrasena_encriptada = password_hash($pass, PASSWORD_DEFAULT);
+                // Crear instancia de Usuario y llamar al método de registro
+                
+
+                // Acceso al administrador  
+                if ($_POST["administrador"] === 'true'){
+                    $admin = new Administrador();
+                    $registroExitoso = $admin->registrarAdministrador($nombre, $apellido, $email, $contrasena_encriptada, );
+                    
+                // Acceso al usuario
+                }else{
+                    $usuario = new Usuario();
+                $registroExitoso = $usuario->registrarUsuario($nombre, $apellido, $email, $contrasena_encriptada, );
+                }
+                
+                if ($registroExitoso) {
+                    $mensaje= "Te has registrado con éxito";
+                    // Redireccionar o mostrar mensaje de éxito
+                    $this->render("usuario/login.php.twig", ["mensaje" => $mensaje]);
+                } else {
+                    // Mostrar mensaje de error
+                    $mensajeError= "Error al registrar al usuario";              
+                    $this->render("usuario/registro.php.twig", ["mensajeError" => $mensajeError]);
+                }
             
-            $nombre = $_POST['nombre'];
-            $apellido = $_POST['apellido'];
-            $email = $_POST['email'];
-            $pass = $_POST['pass'];
-            $passc = $_POST['passc'];
-
-            // Validar contraseñas coincidentes, longitud, etc.
-            // Validación de contraseñas coincidentes
-            if ($pass != $passc) {
-                $mensajeError= "Las contraseñas no coinciden. Vuelve e intentarlo de nuevo.";
-                $this->render("usuario/registro.php.twig", ["mensajeError" => $mensajeError]);
-                exit(); // Terminamos el script si las contraseñas no coinciden
-            }
-            // Verificar si la contraseña es demasiado larga
-            $max_longitud = 30; // Establecer la longitud máxima deseada
-            if (strlen($pass) > $max_longitud) {
-
-                $pass = substr($pass, 0, $max_longitud); // Truncar la contraseña si es demasiado larga
-            }
-
-            // Encriptar la contraseña antes de almacenarla en la base de datos
-            $contrasena_encriptada = password_hash($pass, PASSWORD_DEFAULT);
-            // Crear instancia de Usuario y llamar al método de registro
-            $usuario = new Usuario();
-            $registroExitoso = $usuario->registrarUsuario($nombre, $apellido, $email, $contrasena_encriptada, );
-
-            if ($registroExitoso) {
-                $mensaje= "Te has registrado con éxito";
-                // Redireccionar o mostrar mensaje de éxito
-                $this->render("usuario/login.php.twig", ["mensaje" => $mensaje]);
-            } else {
-                // Mostrar mensaje de error
-                $mensajeError= "Error al registrar al usuario";              
-                $this->render("usuario/registro.php.twig", ["mensajeError" => $mensajeError]);
-            }
         }
+        
     }
     public function modificarUsuario(){
       
@@ -207,7 +225,7 @@ class UsuarioController extends Controller
 
             //Verificar si los campos no estan vacios
             if ($nombre === '' || $apellido === '' || $email === '' || $pass === '' || $passc === '') {
-                $mensajeError= "No puede haber  campos vacios";
+                $mensajeError= "No puede haber campos vacios";
                 $this->render("usuario/modificarUsuario.php.twig", ["mensajeError" => $mensajeError]);
                 exit(); // Terminamos el script si las contraseñas no coinciden
             }

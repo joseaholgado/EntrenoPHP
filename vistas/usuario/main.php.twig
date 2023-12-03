@@ -1,24 +1,22 @@
 {% extends "plantilla.php.twig" %}
 
 {% block cuerpo %}
-		<div class="row row-cols-1 row-cols-md-3 g-4">
-        {% for musculo in musculos %}		
-			<div class="col">
-				<div class="card shadow" style="width:18rem;">
-					<img src="{{ musculo.imagen_musculo }}" class="card-img-top" />
-					<div class="card-body">
-						<h4 class="card-title">{{ musculo.nombre|upper }}</h4>
-						
-						<a  href="index.php?m=entrenamiento&f=listadoEjercicio&id={{ musculo.nombre }}" class="btn btn-dark btn-sm"
-						 style="display: flex; flex-direction: column; align-items: center" >Mas info+</a>
-					</div>
-				</div>
-			</div>
-			
-		{% endfor %}
-		</div>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for musculo in musculos %}
+    <div class="col">
+        <div class="card shadow h-100" style="width: 18rem;">
+            <img src="{{ musculo.imagen_musculo }}" class="card-img-top h-100" style="object-fit: cover;" />
+            <div class="card-body">
+                <h4 class="card-title">{{ musculo.nombre|upper }}</h4>
+                <a href="index.php?m=entrenamiento&f=listadoEjercicio&id={{ musculo.nombre }}" class="btn btn-dark btn-sm" style="display: flex; flex-direction: column; align-items: center">Mas info+</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}
 
 {% block pie %}
 Este es el nuevo pie
 {% endblock %}
+

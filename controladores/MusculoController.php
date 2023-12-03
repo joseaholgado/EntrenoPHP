@@ -3,7 +3,7 @@
     require_once "modelos/Musculo.php" ;
 
     class MusculoController extends Controller {
-
+        
         /**
          * Este método se encarga de mostrar un listado de
          * todas las Musculos contenidas en la base de datos.

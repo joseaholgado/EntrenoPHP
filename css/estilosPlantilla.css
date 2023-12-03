@@ -130,3 +130,13 @@ p{
   color: #ffffff;
   font-weight:lighter;
 }
+.fondo{
+    background-color: antiquewhite;
+}
+.fotoPerfil{
+    width: 10%;
+    height: 10%;
+    background-color: aqua;
+    border-radius: 50%;
+    border: 2px solid #FFA500;
+}

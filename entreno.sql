@@ -114,6 +114,7 @@ CREATE TABLE `usuario` (
   `foto` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+
 --
 -- Volcado de datos para la tabla `usuario`
 --
@@ -122,6 +123,21 @@ INSERT INTO `usuario` (`idUsuario`, `email`, `pass`, `nombre`, `apellido`, `foto
 (1, 'bruce@wayne.com', '2c65c8d7bfbca32a3ed42596192384f6', 'Bruce', 'Wayne', NULL),
 (2, 'selina@kyle.com', 'e99d7ed5580193f36a51f597bc2c0210', 'Selina', 'Kyle', NULL),
 (3, 'jose@jose.com', '1234', 'Jose', 'Bonet', NULL);
+
+
+--
+-- Estructura de tabla para la tabla `administrador`
+--
+
+CREATE TABLE `administrador` (
+  `idUsuario` int NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `pass` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `apellido` varchar(150) NOT NULL,
+  `foto` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 --
 -- Índices para tablas volcadas
@@ -140,6 +156,13 @@ ALTER TABLE `usuario`
   ADD PRIMARY KEY (`idUsuario`),
   ADD UNIQUE KEY `email` (`email`);
 
+  --
+-- Indices de la tabla `administrador`
+--
+ALTER TABLE `administrador`
+  ADD PRIMARY KEY (`idUsuario`),
+  ADD UNIQUE KEY `email` (`email`);
+
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
@@ -154,6 +177,13 @@ ALTER TABLE `entrenamiento`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
+  MODIFY `idUsuario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
+--
+-- AUTO_INCREMENT de la tabla `administrador`
+--
+ALTER TABLE `administrador`
   MODIFY `idUsuario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 

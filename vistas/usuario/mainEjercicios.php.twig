@@ -1,25 +1,22 @@
 {% extends "plantilla.php.twig" %}
 
 {% block cuerpo %}
-
-		<div class="row row-cols-1 row-cols-md-3 g-4">
-        {% for entrenamiento in entrenamientos %}		
-			<div class="col">
-				<div class="card shadow" style="width:18rem;">
-					<img src="{{ entrenamiento.imagen_ejercicio }}" class="card-img-top" />
-					<div class="card-body">
-						<h4 class="card-title">{{ entrenamiento.nombre|upper }}</h4>
-						<h6>DIFICULTAD: {{ entrenamiento.dificultad }}</h6>
-						{# <p class="card-text">{{ entrenamiento.explicacion|nl2br  }}</p> #}
-						<a href="info.php?id={{ entrenamiento.idEntrenamiento }}" class="btn btn-dark btn-sm">Mas info.</a>
-					</div>
-				</div>
-			</div>
-			
-		{% endfor %}
-		</div>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for entrenamiento in entrenamientos %}
+    <div class="col">
+        <div class="card shadow h-100" style="width: 18rem;">
+            <img src="{{ entrenamiento.imagen_ejercicio }}" class="card-img-top h-100" style="object-fit: cover;" />
+            <div class="card-body">
+                <h4 class="card-title">{{ entrenamiento.nombre|upper }}</h4>
+                <h6>DIFICULTAD: {{ entrenamiento.dificultad }}</h6>
+                {# <p class="card-text">{{ entrenamiento.explicacion|nl2br  }}</p> #}
+                <a href="index.php?m=entrenamiento&f=descripcion&id={{ entrenamiento.idEntrenamiento }}" class="btn btn-dark btn-sm">Mas info.</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}
 
 {% block pie %}
-
 {% endblock %}

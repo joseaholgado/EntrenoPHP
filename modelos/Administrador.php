@@ -2,7 +2,7 @@
 
 require_once "librerias/Conexion.php";
 
-class Usuario
+class Administrador
 {
 
     public int $idUsuario;
@@ -17,57 +17,57 @@ class Usuario
     }
 
 
-    // Método para obtener el nombre del usuario
+    // Método para obtener el nombre del Administrador
     public function getNombre(): string
     {
         return $this->nombre;
     }
-    public function getIdUsuario(): string
+    public function getIdAdministrador(): string
     {
         return $this->idUsuario;
     }
 
     /**
-     * @return Usuario
+     * @return Administrador
      */
-    public static function getUsuario(int $id)
+    public static function getAdministrador(int $id)
     {
 
         return Conexion::getConnection()
-            ->query("SELECT * FROM usuario WHERE idUsuario={$id} ;")
-            ->getRow("Usuario");
+            ->query("SELECT * FROM administrador WHERE idUsuario={$id} ;")
+            ->getRow("administrador");
     }
 
     /**
-     * @return Usuario
+     * @return Administrador
      */
-    // public static function loginUsuario(string $email, string $password) {
+    // public static function loginAdministrador(string $email, string $password) {
 
     //     $pass = password_hash($password, PASSWORD_DEFAULT);
 
     //     return Conexion::getConnection()
-    //             ->query("SELECT * FROM usuario 
+    //             ->query("SELECT * FROM Administrador 
     //                      WHERE email='{$email}' AND pass='{$pass}' ;") 
-    //             ->getRow("Usuario") ;   
+    //             ->getRow("Administrador") ;   
     // }
-    public static function loginUsuario(string $email, string $password)
+    public static function loginAdministrador(string $email, string $password)
     {
-        // Buscar al usuario por su correo electrónico
+        // Buscar al Administrador por su correo electrónico
         $user = Conexion::getConnection()
-            ->query("SELECT * FROM usuario WHERE email='{$email}'")
-            ->getRow("Usuario");
+            ->query("SELECT * FROM administrador WHERE email='{$email}'")
+            ->getRow("administrador");
 
         if ($user) {
 
 
-            // Si se encuentra el usuario, verificar la contraseña
+            // Si se encuentra el Administrador, verificar la contraseña
             if (password_verify($password, $user->pass)) {
-                // La contraseña es correcta, devolver el usuario
+                // La contraseña es correcta, devolver el Administrador
                 return $user;
             }
         }
         
-        // Usuario no encontrado o contraseña incorrecta
+        // Administrador no encontrado o contraseña incorrecta
         return null;
     }
 
@@ -78,17 +78,17 @@ class Usuario
     {
 
         Conexion::getConnection()
-            ->query("DELETE FROM usuario WHERE idUsuario={$this->idUsuario};");
+            ->query("DELETE FROM administrador WHERE idUsuario={$this->idUsuario};");
     }
 
 
-    public function registrarUsuario($nombre, $apellido, $email, $pass)
+    public function registrarAdministrador($nombre, $apellido, $email, $pass)
     {
         // Crear conexión utilizando el patrón Singleton
         $conexion = Conexion::getConnection();
         
         // Validación de datos y sentencia preparada para inserción
-        $sql = "INSERT INTO usuario (nombre, apellido, email, pass) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO administrador (nombre, apellido, email, pass) VALUES (?, ?, ?, ?)";
         $stmt = $conexion->prepare($sql);
         $stmt->bind_param("ssss", $nombre, $apellido, $email, $pass);
 
@@ -100,19 +100,19 @@ class Usuario
         return $registroExitoso;
     }
 
-    public function actualizarUsuario($nombre, $apellido, $email, $pass, $idUsuario)
+    public function actualizarAdministrador($nombre, $apellido, $email, $pass, $idAdministrador)
     {
         // Crear conexión utilizando el patrón Singleton
         $conexion = Conexion::getConnection();
 
         // Validación de datos y sentencia preparada para actualización
-        $sql = "UPDATE usuario SET nombre = ?, apellido = ?, email = ?, pass = ? WHERE idUsuario = ?";
+        $sql = "UPDATE administrador SET nombre = ?, apellido = ?, email = ?, pass = ? WHERE idUsuario = ?";
         $stmt = $conexion->prepare($sql);
 
         // Verificar si la preparación de la consulta fue exitosa
         if ($stmt) {
             // Vincular parámetros
-            $stmt->bind_param("ssssi", $nombre, $apellido, $email, $pass, $idUsuario);
+            $stmt->bind_param("ssssi", $nombre, $apellido, $email, $pass, $idAdministrador);
 
             // Ejecutar la consulta
             $registroExitoso =$stmt->execute();

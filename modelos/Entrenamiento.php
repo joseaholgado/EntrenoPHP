@@ -130,7 +130,7 @@
             // Podemos encadenar llamadas a métodos tras utilizar
             // métodos que devuelvan la instancia de la clase Conexion.
             return Conexion::getConnection()
-                        ->query("SELECT * FROM Entrenamiento WHERE idEntrenamiento={$idEntrenamiento} ;")
+                        ->query("SELECT * FROM entrenamiento WHERE idEntrenamiento={$idEntrenamiento} ;")
                         ->getRow("Entrenamiento") ;            
         }
 
@@ -162,6 +162,26 @@
             return $db->getAll("entrenamiento") ;
                     
         }
+
+        // public static function getAllEntrenamientoBusqueda(string $busqueda): array {
+            
+        //     $db = Conexion::getConnection();
+
+        //     // recuperamos la cadena de búsqueda
+        //     $query = $_GET["query"] ;
+            
+        //     // lanzamos la consulta
+        //     $sql = "SELECT * FROM serie WHERE titulo LIKE '%{$query}%' OR argumento LIKE '%{$query}%' ;" ;
+        //     $resultado = $db->query($sql) ;
+
+        //      // recuperamos todos los resultados
+        //     $ejercicio = $resultado->fetch_all(MYSQLI_ASSOC) ;
+
+        //     foreach($ejercicio as $item) echo "<option value=\"{$item["nombre"]}\"></option>" ;
+
+           
+                    
+        // }
 
 
 

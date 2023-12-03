@@ -46,6 +46,15 @@
 						   id="pass" type="password" name="pass" />
 				</div>
 			</div>
+
+			<div class="row">
+				<div class="col-xs-2">
+					<label for="checkbox_id"> Soy administrador:</label>
+				</div>
+				<div class="col">
+					<input type="checkbox" id="checkbox_id" name="administrador" value="true">
+				</div>
+			</div>
 		
 			<div class="row mt-2">
 				<div class="col">
@@ -53,6 +62,8 @@
                 <button class="btn" type="submit">Enviar Datos</button>
 				</div>
 			</div>
+
+			
 			{% if mensaje %}
         		<div class="alert alert-success alert-dismissible fade show" role="alert">
             			{{ mensaje }}
