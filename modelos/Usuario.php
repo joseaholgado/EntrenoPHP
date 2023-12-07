@@ -84,6 +84,7 @@ class Usuario
 
     public function registrarUsuario($nombre, $apellido, $email, $pass)
     {
+        
         // Crear conexión utilizando el patrón Singleton
         $conexion = Conexion::getConnection();
         
@@ -128,5 +129,33 @@ class Usuario
         return $registroExitoso;
 
 
+    }
+    public function actualizarUsuarioConImagen ($nombre, $apellido, $email, $pass, $idUsuario, $foto){
+         // Crear conexión utilizando el patrón Singleton
+         $conexion = Conexion::getConnection();
+        
+         // Validación de datos y sentencia preparada para actualización
+         $sql = "UPDATE usuario SET nombre = ?, apellido = ?, email = ?, pass = ?, foto = ? WHERE idUsuario = ?";
+         $stmt = $conexion->prepare($sql);
+ 
+         // Verificar si la preparación de la consulta fue exitosa
+         if ($stmt) {
+             // Vincular parámetros
+             $stmt->bind_param("sssssi", $nombre, $apellido, $email, $pass, $foto, $idUsuario);
+;
+
+             
+             // Ejecutar la consulta
+             $registroExitoso =$stmt->execute();
+ 
+            
+ 
+             // Cerrar la sentencia
+             $stmt->close();
+         } else {
+             echo "Error al preparar la consulta.";
+         }
+ 
+         return $registroExitoso;
     }
 }

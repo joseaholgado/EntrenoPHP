@@ -10,23 +10,27 @@ RewriteEngine on
 # RewriteRule ^usuario/eliminar/([1-9][0-9]*)$ index.php?m=usuario&f=eliminar&id=$1 [L]
 
 #Inicio del index prederterminado
-RewriteRule ^$index.php?m=usuario&f=showLogin [L]
+RewriteRule ^$index.php?m=Usuario&f=showLogin [L]
 #Muestra en el main el listado de los musculos
-RewriteRule ^main$ index.php?m=musculo&f=listado [L]
+RewriteRule ^main$ index.php?m=Musculo&f=listado [L]
 #Muestra el registro en pantalla
-RewriteRule ^registro$ index.php?m=usuario&f=showregistro [L]
+RewriteRule ^registro$ index.php?m=Usuario&f=showregistro [L]
 #Registra al usuario
-RewriteRule ^registroUsuario$ index.php?m=usuario&f=registro [L]
+RewriteRule ^registroUsuario$ index.php?m=Usuario&f=registro [L]
 #Busqueda del navegador de ejercicios
-RewriteRule ^busquedaEjercicio$ index.php?m=entrenamiento&f=busqueda [L]
+RewriteRule ^busquedaEjercicio$ index.php?m=Entrenamiento&f=busqueda [L]
 #Elimina la cuenta del usuario
-RewriteRule ^eliminarCuenta$ index.php?m=usuario&f=eliminar [L]
+RewriteRule ^eliminarCuenta$ index.php?m=Usuario&f=eliminar [L]
 #Muestra el modificar Datos en pantalla
-RewriteRule ^modificarUsuario$ index.php?m=usuario&f=showModificarUsuario [L]
+RewriteRule ^modificarUsuario$ index.php?m=Usuario&f=showModificarUsuario [L]
 #Modifica la cuenta del usuario
-RewriteRule ^modificarUsuarioDatos$ index.php?m=usuario&f=modificarUsuario [L]
+RewriteRule ^modificarUsuarioDatos$ index.php?m=Usuario&f=modificarUsuario [L]
+#Modifica la cuenta del usuario con imagen
+RewriteRule ^modificarUsuarioDatos$ index.php?m=Usuario&f=modificarUsuario [L]
 #Cierra la sesion del usuario
-RewriteRule ^cerrarSesion$ index.php?m=usuario&f=cerrarSesion [L]
+RewriteRule ^cerrarSesion$ index.php?m=Usuario&f=cerrarSesion [L]
+#Cierra la sesion y vuelve al login
+RewriteRule ^index$ index.php [L]
 
 
 

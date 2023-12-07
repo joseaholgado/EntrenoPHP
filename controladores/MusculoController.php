@@ -1,6 +1,7 @@
 <?php
     require_once "Controller.php" ;
     require_once "modelos/Musculo.php" ;
+    require_once "librerias/libreria.php";
 
     class MusculoController extends Controller {
         
@@ -10,7 +11,8 @@
          * @return
          */
         public function listado() {
-
+            
+            
             // 1. Solicito al modelo todas las Musculos.
              $todosMusculos = Musculo::getAllMusculo() ;
              //return $todosMusculos;

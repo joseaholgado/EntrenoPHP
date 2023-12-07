@@ -49,7 +49,7 @@
             // Accededo a $this->todasEntrenamientos que fue asignada en listadoEjercicio()
             
             // 2. Mostramos la información que nos proporciona el modelo.           
-            $this->render("Entrenamiento/mainDescripcion.php.twig", ["ejercicio" => $ejercicio,  ] ) ;
+            $this->render("entrenamiento/mainDescripcion.php.twig", ["ejercicio" => $ejercicio,  ] ) ;
     
         }
 

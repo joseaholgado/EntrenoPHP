@@ -3,34 +3,36 @@
 {% block cuerpo %}
 
 
+	<link
+	href="./css/estilosModificarUsuario.css" rel="stylesheet" type="text/css"/>
+	<!-- Bootstrap que agrega script para la validación -->
+	-->
 
-	
-<link href="./css/estilosModificarUsuario.css" rel="stylesheet" type="text/css" />
-<!-- Bootstrap que agrega script para la validación --> -->
-  
-		{% if mensaje %}
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ mensaje }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-		  {% endif %}
+	{% if mensaje %}
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
+			{{ mensaje }}
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+	{% endif %}
 
 
-		  {% if mensajeError %}
-            	<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                	{{ mensajeError|raw }}
-                	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            	</div>
-        	{% endif %}
+	{% if mensajeError %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			{{ mensajeError|raw }}
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+	{% endif %}
 
-		<div class="container">
-	
-		<form action="modificarUsuarioDatos" method="POST"><!--Direccion de la siguiuente pagina-->
+	<div class="container">
+		
+		<form
+			action="modificarUsuarioDatos" method="POST" enctype="multipart/form-data">
+			<!--Direccion de la siguiuente pagina-->
 
-			<input type="hidden" name="_csrf" value="{{ token }}" />
-			<input type="hidden" name="m" value="usuario" />
-			<input type="hidden" name="f" value="modificarUsuario" />
-			<input type="hidden" name="idUsuario" value="{{_session.usuario.idUsuario}}" />
+			<input type="hidden" name="_csrf" value="{{ token }}"/>
+			<input type="hidden" name="m" value="usuario"/>
+			<input type="hidden" name="f" value="modificarUsuario"/>
+			<input type="hidden" name="idUsuario" value="{{_session.usuario.idUsuario}}"/>
 
 			<div class="header">
 				<h2>///Modificación</h2>
@@ -39,7 +41,8 @@
 
 			<div class="row">
 				<div class="col-xs-2">
-					<label for="nombre">Nombre: </label>
+					<label for="nombre">Nombre:
+					</label>
 				</div>
 
 				<div class="col">
@@ -50,7 +53,8 @@
 			<!-- Apellido -->
 			<div class="row">
 				<div class="col-xs-2">
-					<label for="apellido">Apellido: </label>
+					<label for="apellido">Apellido:
+					</label>
 				</div>
 
 				<div class="col">
@@ -61,33 +65,45 @@
 			<!-- Email -->
 			<div class="row">
 				<div class="col-xs-2">
-					<label for="Email">Email: </label>
+					<label for="Email">Email:
+					</label>
 				</div>
 
 				<div class="col">
-					<input class="form-control" id="email" type="email" name="email" value="{{_session.usuario.email}}" />
+					<input class="form-control" id="email" type="email" name="email" value="{{_session.usuario.email}}"/>
 				</div>
 			</div>
 
 			<!-- Contraseña  -->
 			<div class="row">
 				<div class="col-xs-2">
-					<label for="pass">Contraseña: </label>
+					<label for="pass">Contraseña:
+					</label>
 				</div>
 
 				<div class="col">
-					<input class="form-control" id="pass" type="password" name="pass" />
+					<input class="form-control" id="pass" type="password" name="pass"/>
 				</div>
 			</div>
 
 			<!-- Confirmación contraseña  -->
 			<div class="row">
 				<div class="col-xs-2">
-					<label for="passc">Repite tu contraseña: </label>
+					<label for="passc">Repite tu contraseña:
+					</label>
 				</div>
 
 				<div class="col">
-					<input class="form-control" id="passc" type="password" name="passc" />
+					<input class="form-control" id="passc" type="password" name="passc"/>
+				</div>
+			</div>
+
+			<!-- Subir foto -->
+			<div class="row">
+				<div class="col">
+					<label for="foto">Subir Foto (Opcional):
+					</label>
+					<input type="file" name="foto" accept="image/*">
 				</div>
 			</div>
 
@@ -96,30 +112,10 @@
 					<button type="submit" class="btn" id="enviar">Actualizar Datos</button>
 				</div>
 			</div>
-			
-
 		</form>
 
-		<form action="fotoPerfil.php" method="POST" enctype="multipart/form-data">
-			<input type="file" name="foto" accept="image/*">
-			<input type="submit" value="Subir Foto">
-		</form>
-		
 
 		<div class="img">
 			<img src="./img/fondo.png"></img>
-		</div>
 	</div>
-
-	
-
-	
-			
-		
-		</div>
-		
-{% endblock %}
-
-{% block pie %}
-
-{% endblock %}
+</div></div>{% endblock %}{% block pie %}{% endblock %}

@@ -15,10 +15,10 @@ class UsuarioController extends Controller
      */
     public function showLogin()
     {
-
+       
         // Generamos el token para protección CSRF
         $token = md5(uniqid(mt_rand()));
-
+       
         // Guardamos el token en la sesión
         $_SESSION["_csrf"] = $token;
 
@@ -38,6 +38,8 @@ class UsuarioController extends Controller
         //      redireccion("http://localhost/proyectoPHP");
 
         //
+
+        
         if ((empty($_POST["email"])) || (empty($_POST["pass"]))):
             // Hacemos una redirección al formulario de login indicando
             // que hay un error.
@@ -45,32 +47,55 @@ class UsuarioController extends Controller
             // TODO
 
         endif;
+         // Acceso al administrador  
+         if (isset($_POST["administrador"])) {
+            if ($_POST["administrador"] === 'true'){
+                // Solicitamos al MODELO que comprueba si existe algún
+            // usuario coincidente en el email y la contraseña que
+            // se nos proporciona a través del formulario.
+            $usuario = Administrador::loginAdministrador($_POST["email"], $_POST["pass"]);
 
-        // Solicitamos al MODELO que comprueba si existe algún
-        // usuario coincidente en el email y la contraseña que
-        // se nos proporciona a través del formulario.
-        $usuario = Usuario::loginUsuario($_POST["email"], $_POST["pass"]);
-     
+            if (is_null($usuario)):
 
-        if (is_null($usuario)):
+                // Usuario no encontrado en la base de datos, se establece un mensaje de error
+           $mensajeError = "El usuario o la contraseña<br> proporcionados son incorrectos.";
+   
+           // Se renderiza la vista de login con el mensaje de error
+           $this->render("usuario/login.php.twig", ["mensajeError" => $mensajeError]);
+               exit();
+               // TODO                
+           endif;
 
-             // Usuario no encontrado en la base de datos, se establece un mensaje de error
-        $mensajeError = "El usuario o la contraseña<br> proporcionados son incorrectos.";
 
-        // Se renderiza la vista de login con el mensaje de error
-        $this->render("usuario/login.php.twig", ["mensajeError" => $mensajeError]);
-            exit();
-            // TODO                
-        endif;
 
+            }
+        }else{
+            // Solicitamos al MODELO que comprueba si existe algún
+            // usuario coincidente en el email y la contraseña que
+            // se nos proporciona a través del formulario.
+            $usuario = Usuario::loginUsuario($_POST["email"], $_POST["pass"]);
+
+            if (is_null($usuario)):
+
+                // Usuario no encontrado en la base de datos, se establece un mensaje de error
+           $mensajeError = "El usuario o la contraseña<br> proporcionados son incorrectos.";
+   
+           // Se renderiza la vista de login con el mensaje de error
+           $this->render("usuario/login.php.twig", ["mensajeError" => $mensajeError]);
+               exit();
+               // TODO                
+           endif;
+
+            
+        }
         
-
-      
 
         // El usuario existe, por lo tanto lo redirigimos a la página
         // principal de la aplicación.
         $_SESSION['usuario'] = $usuario ;
         $_SESSION["inicio"] = time();
+
+        
 
         //
         // Llamar a listado() en MusculoController y pasar los datos a la vista
@@ -106,10 +131,11 @@ class UsuarioController extends Controller
     }
     public function cerrarSesion()
     {
-        session_unset();
+        
+        session_unset();  
         session_destroy();
         
-        header("location: http://localhost/proyectoPHP") ;
+        header("location: index") ;
     }
 
 
@@ -119,12 +145,12 @@ class UsuarioController extends Controller
     {
       
 
-        show( $_GET["idUsuario"]);
         $id = $_POST["idUsuario"];
         $usuario = Usuario::getUsuario($id);
         $usuario->borrar();    // TELL DON'T ASK
-
+        
         $this->cerrarSesion() ;
+
     }
 
 
@@ -167,25 +193,29 @@ class UsuarioController extends Controller
                     $this->render("usuario/registro.php.twig", ["mensajeError" => $mensajeError]);
                     exit(); // Terminamos el script si las contraseñas no coinciden
                 }
+                
                 // Verificar si la contraseña es demasiado larga
                 $max_longitud = 30; // Establecer la longitud máxima deseada
                 if (strlen($pass) > $max_longitud) {
 
                     $pass = substr($pass, 0, $max_longitud); // Truncar la contraseña si es demasiado larga
                 }
-
+                
                 // Encriptar la contraseña antes de almacenarla en la base de datos
                 $contrasena_encriptada = password_hash($pass, PASSWORD_DEFAULT);
                 // Crear instancia de Usuario y llamar al método de registro
                 
 
                 // Acceso al administrador  
-                if ($_POST["administrador"] === 'true'){
+                if (isset($_POST["administrador"])) {
+                    if ($_POST["administrador"] === 'true'){
                     $admin = new Administrador();
                     $registroExitoso = $admin->registrarAdministrador($nombre, $apellido, $email, $contrasena_encriptada, );
+                    }
                     
                 // Acceso al usuario
                 }else{
+                    
                     $usuario = new Usuario();
                 $registroExitoso = $usuario->registrarUsuario($nombre, $apellido, $email, $contrasena_encriptada, );
                 }
@@ -240,7 +270,30 @@ class UsuarioController extends Controller
             $contrasena_encriptada = password_hash($pass, PASSWORD_DEFAULT);
             // Crear instancia de Usuario y llamar al método de registro
             $usuario = new Usuario();
-            $registroExitoso = $usuario->actualizarUsuario($nombre, $apellido, $email, $contrasena_encriptada, $idUsuario);
+            
+            if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+               
+                // Procesar la imagen aquí
+                $archivo_nombre = $_FILES['foto']['name'];
+                $archivo_temp = $_FILES['foto']['tmp_name'];
+                $archivo_error = $_FILES['foto']['error'];
+                $directorio_destino = './img/'; // Directorio donde se guardarán las imágenes
+                $ruta_destino = $directorio_destino . $archivo_nombre;// Mover el archivo al directorio de destino
+                $ruta_para_db = './img/' . $archivo_nombre; // Ruta relativa al directorio 
+                
+                // Mueve el archivo al directorio de destino
+                move_uploaded_file($archivo_temp, $ruta_destino);
+
+                $registroExitoso = $usuario->actualizarUsuarioConImagen($nombre, $apellido, $email, $contrasena_encriptada, $idUsuario, $ruta_para_db);
+            
+            }else{
+                $registroExitoso = $usuario->actualizarUsuario($nombre, $apellido, $email, $contrasena_encriptada, $idUsuario);
+            }
+
+            //Actualizamos el _SESSION
+            $usuario = Usuario::loginUsuario($_POST["email"], $_POST["pass"]);
+            $_SESSION['usuario'] = $usuario ;
+
 
             if ($registroExitoso) {
                 $mensaje= "Registro exitoso";
