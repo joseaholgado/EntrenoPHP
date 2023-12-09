@@ -99,6 +99,30 @@ INSERT INTO `entrenamiento` (`idEntrenamiento`, `nombre`, `musculo_id`, `explica
 2-Coloca un pie en el step, presionando con el talón para levantar tu cuerpo hacia arriba.
 3-Sube el segundo pie para unirlo al primero en la parte superior del step.
 4-Baja un pie y luego el otro de vuelta al suelo, manteniendo un ritmo constante.', 'https://s3.abcstatics.com/media/bienestar/2020/03/23/subida-escalon-k7PE--510x287@abc.jpg', 1.000000);
+(9, 'Aperturas con mancuernas', 1,
+'1-Acuéstate en un banco plano con una mancuerna en cada mano, brazos extendidos hacia arriba.
+2-Baja los brazos hacia los lados manteniendo una ligera flexión en los codos.
+3-Regresa a la posición inicial.', 'https://i.blogs.es/5c0b8f/aperturas/450_1000.webp', 3.800000),
+(10, 'Flexiones diamante', 1,
+'1-Adopta la posición de flexión con las manos juntas formando un triángulo debajo del pecho.
+2-Baja el cuerpo manteniendo los codos cerca del torso.
+3-Regresa a la posición inicial.', 'https://qph.cf2.quoracdn.net/main-qimg-b2a29dfa09efd332ce2ada8498454ceb-lq', 4.200000),
+(11, 'Remo con barra', 2,
+'1-Inclínate hacia adelante con la espalda recta, agarra la barra con las palmas mirando hacia abajo y los brazos extendidos.
+2-Lleva la barra hacia el abdomen manteniendo los codos pegados al cuerpo.
+3-Baja la barra de manera controlada.', 'https://www.entrenamientos.com/media/cache/exercise_375/uploads/exercise/remo-con-barra-de-pie-init-pos-6237.png', 5.000000),
+(12, 'Peso muerto rumano', 4,
+'1-Sujeta una barra con las manos separadas a la altura de los hombros, piernas casi rectas.
+2-Inclínate desde las caderas manteniendo la espalda recta.
+3-Baja la barra hacia las espinillas manteniendo las piernas ligeramente flexionadas.
+4-Regresa a la posición inicial.', 'https://i.ytimg.com/vi/UU6AS_iHPyI/maxresdefault.jpg', 6.300000),
+(13, 'Elevaciones laterales con mancuernas', 3,
+'1-De pie, con una mancuerna en cada mano, levanta los brazos hacia los lados.
+2-Baja los brazos controladamente.', 'https://eresfitness.com/wp-content/uploads/2019/09/Elevaciones-laterales-con-mancuernas.jpg.webp', 4.500000),
+(14, 'Press Arnold', 3,
+'1-Sentado con mancuernas en las manos, brazos a la altura de los hombros, palmas mirándote.
+2-Levanta las mancuernas y gira las muñecas para llevarlas arriba.
+3-Baja las mancuernas y gira las muñecas de regreso a la posición inicial.', 'https://eresfitness.com/wp-content/uploads/21371105-Dumbbell-Arnold-Press_Shoulders_max.webp', 5.800000);
 -- --------------------------------------------------------
 
 --
