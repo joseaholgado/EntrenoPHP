@@ -1,18 +1,20 @@
-body{
+body {
     background-color: black;
     background-image: url("./img/brazos.jpg");
     background-position: center;
 }
-header{
+
+header {
     margin-bottom: 10px;
 }
+
 .btn {
     border-radius: 50px;
     border: 1px solid #FFA500;
     color: white;
     font-weight: bold;
-    margin-left:10px;
-    
+    margin-left: 10px;
+
 }
 
 .btn:hover {
@@ -23,12 +25,13 @@ header{
 }
 
 
-#nav{
+#nav {
     opacity: 1;
-    background-color:#000000;
-    color:white;
+    background-color: #000000;
+    color: white;
     border: 2px solid #FFA500;
 }
+
 .navbar-brand {
     padding-top: var(--bs-navbar-brand-padding-y);
     padding-bottom: var(--bs-navbar-brand-padding-y);
@@ -38,72 +41,88 @@ header{
     text-decoration: none;
     white-space: nowrap;
 }
-.navbar-brand:hover{
+
+.navbar-brand:hover {
     color: #FFA500;
 }
-.navbar-nav .nav-link.active, .navbar-nav .nav-link.show  {
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
     color: white;
 }
-.nav-link, .dropdown-toggle{
+
+.nav-link,
+.dropdown-toggle {
     color: white;
 }
-.nav-link:hover, .dropdown-toggle:hover{
+
+.nav-link:hover,
+.dropdown-toggle:hover {
     color: #FFA500;
 }
-.nav-link:focus, .dropdown-toggle:focus{
+
+.nav-link:focus,
+.dropdown-toggle:focus {
     color: white;
 }
-.nav-link.disabled, .nav-link:disabled {
+
+.nav-link.disabled,
+.nav-link:disabled {
     color: white;
     opacity: 80%;
     pointer-events: none;
     cursor: default;
 }
+
 .dropdown-menu {
---bs-dropdown-bg: #FFA500;
+    --bs-dropdown-bg: #FFA500;
 }
+
 .footer {
     background-color: #99793D;
     color: #000000;
     padding: 20px 0;
     margin-top: 10px;
-  }
-  
-  .contenedorFooter {
+}
+
+.contenedorFooter {
     width: 100%;
     margin-right: auto;
     margin-left: auto;
     padding-right: 15px;
     padding-left: 15px;
-  }
+}
 
-  
-  .row {
+
+.row {
     display: flex;
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
-  }
-  
-  .col-lg-12 {
+}
+
+.col-lg-12 {
     flex: 0 0 100%;
     max-width: 100%;
     padding-right: 15px;
     padding-left: 15px;
-  }
-  
-  #nombre {
+}
+
+#nombre {
     margin-bottom: 0;
-    
-  }
-#atom{
+
+}
+
+#atom {
     margin-left: 7%;
     width: 149px;
     height: 121px;
 }
-.shadow{
+
+.shadow {
     background-color: #CC9329;
 }
+
 .card-title {
     display: flex;
     flex-direction: column;
@@ -112,7 +131,8 @@ header{
     color: var(--bs-card-title-color);
 
 }
-.card-body{
+
+.card-body {
     flex: 1 1 auto;
     padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
     color: var(--bs-card-color);
@@ -123,17 +143,20 @@ header{
 
 
 
-p{
+p {
     margin-bottom: 0;
-  font-family: 'Poppins', sans-serif; /* Usar la fuente Poppins */
-  font-size: 18px;
-  color: #ffffff;
-  font-weight:lighter;
+    font-family: 'Poppins', sans-serif;
+    /* Usar la fuente Poppins */
+    font-size: 18px;
+    color: #ffffff;
+    font-weight: lighter;
 }
-.fondo{
+
+.fondo {
     background-color: antiquewhite;
 }
-.fotoPerfil{
+
+.fotoPerfil {
     width: 10%;
     height: 10%;
     background-color: aqua;

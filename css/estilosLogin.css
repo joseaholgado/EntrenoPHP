@@ -1,16 +1,18 @@
-
 body {
     background-color: #010101;
     background-image: url("img/fondo.png");
     background-position: center;
 }
-.header{
+
+.header {
     font-family: 'Outfif', sans-serif;
     text-align: center;
 }
-h2{
-    color:#FFA500;
+
+h2 {
+    color: #FFA500;
 }
+
 .container {
     padding: 10%;
     display: flex;
@@ -21,19 +23,20 @@ label {
     height: 80%;
     width: 80%;
     color: white;
-    
+
 }
-.form-control{
+
+.form-control {
     border: 3px solid #FFA500;
-    
-    
+
+
 }
 
 
 .col {
     width: 30%;
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
 }
 
 .btn {
@@ -41,8 +44,8 @@ label {
     border: 1px solid #FFA500;
     color: white;
     font-weight: bold;
-    
-    
+
+
 }
 
 .btn:hover {
@@ -51,7 +54,8 @@ label {
     color: #010101;
 
 }
-a{
+
+a {
     text-decoration: none;
     color: inherit;
 }
@@ -62,7 +66,7 @@ a{
     width: 35%;
 }
 
-    img {
-    
-        width: 180%;
-    }
+img {
+
+    width: 180%;
+}

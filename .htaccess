@@ -9,6 +9,7 @@ RewriteEngine on
 #Busqueda del navegador de ejercicios
 # RewriteRule ^usuario/eliminar/([1-9][0-9]*)$ index.php?m=usuario&f=eliminar&id=$1 [L]
 
+
 #Inicio del index prederterminado
 RewriteRule ^$index.php?m=Usuario&f=showLogin [L]
 #Muestra en el main el listado de los musculos

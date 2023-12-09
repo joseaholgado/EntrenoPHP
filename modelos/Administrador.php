@@ -35,27 +35,21 @@ class Administrador
 
         return Conexion::getConnection()
             ->query("SELECT * FROM administrador WHERE idUsuario={$id} ;")
-            ->getRow("administrador");
+            ->getRow("Administrador");
     }
+   
 
     /**
      * @return Administrador
      */
-    // public static function loginAdministrador(string $email, string $password) {
-
-    //     $pass = password_hash($password, PASSWORD_DEFAULT);
-
-    //     return Conexion::getConnection()
-    //             ->query("SELECT * FROM Administrador 
-    //                      WHERE email='{$email}' AND pass='{$pass}' ;") 
-    //             ->getRow("Administrador") ;   
-    // }
+    
     public static function loginAdministrador(string $email, string $password)
     {
+        
         // Buscar al Administrador por su correo electrónico
         $user = Conexion::getConnection()
             ->query("SELECT * FROM administrador WHERE email='{$email}'")
-            ->getRow("administrador");
+            ->getRow("Administrador");
 
         if ($user) {
 
@@ -66,7 +60,7 @@ class Administrador
                 return $user;
             }
         }
-        
+
         // Administrador no encontrado o contraseña incorrecta
         return null;
     }
@@ -86,7 +80,23 @@ class Administrador
     {
         // Crear conexión utilizando el patrón Singleton
         $conexion = Conexion::getConnection();
-        
+
+        // Verificar si ya existe un usuario con el mismo correo electrónico
+        $sql_verificacion = "SELECT COUNT(*) as count FROM administrador WHERE email = ?";
+        $stmt_verificacion = $conexion->prepare($sql_verificacion);
+        $stmt_verificacion->bind_param("s", $email);
+        $stmt_verificacion->execute();
+        $result = $stmt_verificacion->get_result();
+        $row = $result->fetch_assoc();
+
+        if ($row['count'] > 0) {
+            // El usuario con este correo electrónico ya existe
+            $stmt_verificacion->close();
+            return false;
+        }
+
+
+
         // Validación de datos y sentencia preparada para inserción
         $sql = "INSERT INTO administrador (nombre, apellido, email, pass) VALUES (?, ?, ?, ?)";
         $stmt = $conexion->prepare($sql);
@@ -115,9 +125,9 @@ class Administrador
             $stmt->bind_param("ssssi", $nombre, $apellido, $email, $pass, $idAdministrador);
 
             // Ejecutar la consulta
-            $registroExitoso =$stmt->execute();
+            $registroExitoso = $stmt->execute();
 
-           
+
 
             // Cerrar la sentencia
             $stmt->close();
@@ -128,5 +138,34 @@ class Administrador
         return $registroExitoso;
 
 
+    }
+    public function actualizarAdministradorConImagen($nombre, $apellido, $email, $pass, $idUsuario, $foto)
+    {
+        // Crear conexión utilizando el patrón Singleton
+        $conexion = Conexion::getConnection();
+
+        // Validación de datos y sentencia preparada para actualización
+        $sql = "UPDATE administrador SET nombre = ?, apellido = ?, email = ?, pass = ?, foto = ? WHERE idUsuario = ?";
+        $stmt = $conexion->prepare($sql);
+
+        // Verificar si la preparación de la consulta fue exitosa
+        if ($stmt) {
+            // Vincular parámetros
+            $stmt->bind_param("sssssi", $nombre, $apellido, $email, $pass, $foto, $idUsuario);
+            
+
+
+            // Ejecutar la consulta
+            $registroExitoso = $stmt->execute();
+
+
+
+            // Cerrar la sentencia
+            $stmt->close();
+        } else {
+            echo "Error al preparar la consulta.";
+        }
+
+        return $registroExitoso;
     }
 }

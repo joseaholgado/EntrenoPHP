@@ -1,112 +1,126 @@
 <?php
 
-    require_once "librerias/Conexion.php" ;
-    require_once "modelos/Usuario.php" ;
-    require_once "modelos/Entrenamiento.php" ;
+require_once "librerias/Conexion.php";
+require_once "modelos/Usuario.php";
+require_once "modelos/Entrenamiento.php";
 
-    class Entrenamiento {
+class Entrenamiento
+{
 
-        public int $idEntrenamiento;
-        public string $nombre;
-        public string $musculo_id;
-        public string $explicacion;
-        public string $imagen_ejercicio;
-        public float $dificultad ;
-    
-        /**
-         * @param string $nom
-         * @param string $musc
-         * @param string $expl
-         * @param string $img
-         * @param float  $dif
-         * @return
-         */
-        public function __construct() { }
-        
-        /**
-         * @param string $nom
-         * @return
-         */
-        public function setnombre(string $nom) {
-            $this->nombre = $nom ;
-        }
+    public int $idEntrenamiento;
+    public string $nombre;
+    public string $musculo_id;
+    public string $explicacion;
+    public string $imagen_ejercicio;
+    public float $dificultad;
 
-        /**
-         * @param string $musc
-         * @return
-         */
-        public function setmusculo(string $musc) {
-            $this->musculo = $musc ;
-        }
+    /**
+     * @param string $nom
+     * @param string $musc
+     * @param string $expl
+     * @param string $img
+     * @param float  $dif
+     * @return
+     */
+    public function __construct()
+    {
+    }
 
-        /**
-         * @param string $expl
-         * @return
-         */
-        public function setexplicacion(string $expl) {
-            $this->explicacion = $expl ;
-        }
+    /**
+     * @param string $nom
+     * @return
+     */
+    public function setnombre(string $nom)
+    {
+        $this->nombre = $nom;
+    }
 
-        /**
-         * @param string $img
-         * @return
-         */
-        public function setimagen(string $img) {
-            $this->imagen = $img ;
-        }
+    /**
+     * @param string $musc
+     * @return
+     */
+    public function setmusculo(string $musc)
+    {
+        $this->musculo = $musc;
+    }
 
-        /**
-         * @param float $dif
-         * @return
-         */
-        public function setdificultad(float $dif) {
-            $this->dificultad = $dif ;
-        }
+    /**
+     * @param string $expl
+     * @return
+     */
+    public function setexplicacion(string $expl)
+    {
+        $this->explicacion = $expl;
+    }
 
-        /**
-         * @return string
-         */
-        public function getNombre():string {
-            return $this->nombre ;
-        }
+    /**
+     * @param string $img
+     * @return
+     */
+    public function setimagen(string $img)
+    {
+        $this->imagen = $img;
+    }
 
-        /**
-         * @return string
-         */
-        public function getMusculo():string {
-            return $this->musculo_id ;
-        }
+    /**
+     * @param float $dif
+     * @return
+     */
+    public function setdificultad(float $dif)
+    {
+        $this->dificultad = $dif;
+    }
 
-        /**
-         * @return string
-         */
-        public function getExplicacion():string {
-            return $this->explicacion ;
-        }
+    /**
+     * @return string
+     */
+    public function getNombre(): string
+    {
+        return $this->nombre;
+    }
 
-        /**
-         * @return string
-         */
-        public function getImagen():string {
-            return $this->imagen_ejercicio ;
-        }
+    /**
+     * @return string
+     */
+    public function getMusculo(): string
+    {
+        return $this->musculo_id;
+    }
 
-        /**
-         * @return int
-         */
-        public function getDificultad():int {
-            return floor($this->dificultad * 0.5) ;
-        }
+    /**
+     * @return string
+     */
+    public function getExplicacion(): string
+    {
+        return $this->explicacion;
+    }
 
-        /**
-         * @return string
-         */
-        public function __toString():string {
+    /**
+     * @return string
+     */
+    public function getImagen(): string
+    {
+        return $this->imagen_ejercicio;
+    }
 
-            $estrellas = estrellas($this->getDificultad()) ;
-            $explicacion = substr($this->explicacion, 0,50)."..." ;
+    /**
+     * @return int
+     */
+    public function getDificultad(): int
+    {
+        return floor($this->dificultad * 0.5);
+    }
 
-            return "<div class=\"col\">
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+
+        $estrellas = estrellas($this->getDificultad());
+        $explicacion = substr($this->explicacion, 0, 50) . "...";
+
+        return "<div class=\"col\">
                         <div class=\"imgd shadow\" style=\"width:18rem;\">
                             <img src=\"{$this->imagen_ejercicio}\" class=\"imgd-img-top\" />
                             <div class=\"imgd-body\">
@@ -117,72 +131,58 @@
                                 <a href=\"#\" class=\"btn btn-dark btn-sm\">Mas info.</a>
                             </div>
                         </div>
-                    </div>" ;
-        }
+                    </div>";
+    }
 
-        /**
-         * Recupera información sobre una determinada Entrenamiento
-         * @param int $idEntrenamiento
-         * @return Entrenamiento
-         */
-        public static function getEntrenamiento(int $idEntrenamiento):Entrenamiento 
-        {            
-            // Podemos encadenar llamadas a métodos tras utilizar
-            // métodos que devuelvan la instancia de la clase Conexion.
-            return Conexion::getConnection()
-                        ->query("SELECT * FROM entrenamiento WHERE idEntrenamiento={$idEntrenamiento} ;")
-                        ->getRow("Entrenamiento") ;            
-        }
+    /**
+     * Recupera información sobre una determinada Entrenamiento
+     * @param int $idEntrenamiento
+     * @return Entrenamiento
+     */
+    public static function getEntrenamiento(int $idEntrenamiento): Entrenamiento
+    {
+        // Podemos encadenar llamadas a métodos tras utilizar
+        // métodos que devuelvan la instancia de la clase Conexion.
+        return Conexion::getConnection()
+            ->query("SELECT * FROM entrenamiento WHERE idEntrenamiento={$idEntrenamiento} ;")
+            ->getRow("Entrenamiento");
+    }
 
+    /**
+     * Recupera información sobre una determinada EntrenamientoByMusculo
+     * @param string $nombreEntrenamiento
+     * @return Entrenamiento
+     */
+    public static function getEntrenamientosByMusculo(string $nombreEntrenamiento): array
+    {
+        //var_dump($_GET['id']);
+        // show($nombreEntrenamiento);
 
-        public static function getEntrenamientosByMusculo(string $nombreEntrenamiento):array 
-        {             
-           //var_dump($_GET['id']);
-           // show($nombreEntrenamiento);
-           
-            // Podemos encadenar llamadas a métodos tras utilizar
-            // métodos que devuelvan la instancia de la clase Conexion.
-            return Conexion::getConnection()
-                        ->query("SELECT e.* FROM entrenamiento e JOIN musculo m ON e.musculo_id = m.idMusculo WHERE m.nombre = '$nombreEntrenamiento'")
-                        ->getAll("entrenamiento") ;            
-        }
-        /**
-         * Recupera información sobre todas las Entrenamientos
-         * @return array
-         */
-        public static function getAllEntrenamiento(): array {
-            
-            // Recuperamos la instancia de la clase Conexión
-            $db = Conexion::getConnection() ; 
+        // Podemos encadenar llamadas a métodos tras utilizar
+        // métodos que devuelvan la instancia de la clase Conexion.
+        return Conexion::getConnection()
+            ->query("SELECT e.* FROM entrenamiento e JOIN musculo m ON e.musculo_id = m.idMusculo WHERE m.nombre = '$nombreEntrenamiento'")
+            ->getAll("entrenamiento");
+    }
+    /**
+     * Recupera información sobre todas las Entrenamientos
+     * @return array
+     */
+    public static function getAllEntrenamiento(): array
+    {
 
-            // Realizamos la consulta 
-            $db->query("SELECT * FROM entrenamiento ; ") ;
+        // Recuperamos la instancia de la clase Conexión
+        $db = Conexion::getConnection();
 
-            // Recuperamos los datos y los devolvemos en forma de array
-            return $db->getAll("entrenamiento") ;
-                    
-        }
+        // Realizamos la consulta 
+        $db->query("SELECT * FROM entrenamiento ; ");
 
-        // public static function getAllEntrenamientoBusqueda(string $busqueda): array {
-            
-        //     $db = Conexion::getConnection();
-
-        //     // recuperamos la cadena de búsqueda
-        //     $query = $_GET["query"] ;
-            
-        //     // lanzamos la consulta
-        //     $sql = "SELECT * FROM serie WHERE titulo LIKE '%{$query}%' OR argumento LIKE '%{$query}%' ;" ;
-        //     $resultado = $db->query($sql) ;
-
-        //      // recuperamos todos los resultados
-        //     $ejercicio = $resultado->fetch_all(MYSQLI_ASSOC) ;
-
-        //     foreach($ejercicio as $item) echo "<option value=\"{$item["nombre"]}\"></option>" ;
-
-           
-                    
-        // }
-
-
+        // Recuperamos los datos y los devolvemos en forma de array
+        return $db->getAll("entrenamiento");
 
     }
+
+  
+
+
+}

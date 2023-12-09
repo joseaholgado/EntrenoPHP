@@ -27,31 +27,25 @@ class Usuario
         return $this->idUsuario;
     }
 
-    /**
+    /**Metodo para obtener el usuario por su id
+     * 
      * @return Usuario
      */
     public static function getUsuario(int $id)
     {
-
+       
         return Conexion::getConnection()
             ->query("SELECT * FROM usuario WHERE idUsuario={$id} ;")
             ->getRow("Usuario");
     }
 
-    /**
+    /**Metodo para obtener el usuario por su email
      * @return Usuario
      */
-    // public static function loginUsuario(string $email, string $password) {
-
-    //     $pass = password_hash($password, PASSWORD_DEFAULT);
-
-    //     return Conexion::getConnection()
-    //             ->query("SELECT * FROM usuario 
-    //                      WHERE email='{$email}' AND pass='{$pass}' ;") 
-    //             ->getRow("Usuario") ;   
-    // }
+    
     public static function loginUsuario(string $email, string $password)
     {
+       
         // Buscar al usuario por su correo electrónico
         $user = Conexion::getConnection()
             ->query("SELECT * FROM usuario WHERE email='{$email}'")
@@ -66,12 +60,12 @@ class Usuario
                 return $user;
             }
         }
-        
+
         // Usuario no encontrado o contraseña incorrecta
         return null;
     }
 
-    /**
+    /**Mtodo para borrar al usuario
      * @return
      */
     public function borrar()
@@ -81,13 +75,29 @@ class Usuario
             ->query("DELETE FROM usuario WHERE idUsuario={$this->idUsuario};");
     }
 
-
+    /**Metodo para registrar al usuario
+     * @return bool
+     */
     public function registrarUsuario($nombre, $apellido, $email, $pass)
     {
-        
+
         // Crear conexión utilizando el patrón Singleton
         $conexion = Conexion::getConnection();
-        
+
+        // Verificar si ya existe un usuario con el mismo correo electrónico
+        $sql_verificacion = "SELECT COUNT(*) as count FROM usuario WHERE email = ?";
+        $stmt_verificacion = $conexion->prepare($sql_verificacion);
+        $stmt_verificacion->bind_param("s", $email);
+        $stmt_verificacion->execute();
+        $result = $stmt_verificacion->get_result();
+        $row = $result->fetch_assoc();
+
+        if ($row['count'] > 0) {
+            // El usuario con este correo electrónico ya existe
+            $stmt_verificacion->close();
+            return false;
+        }
+
         // Validación de datos y sentencia preparada para inserción
         $sql = "INSERT INTO usuario (nombre, apellido, email, pass) VALUES (?, ?, ?, ?)";
         $stmt = $conexion->prepare($sql);
@@ -116,9 +126,9 @@ class Usuario
             $stmt->bind_param("ssssi", $nombre, $apellido, $email, $pass, $idUsuario);
 
             // Ejecutar la consulta
-            $registroExitoso =$stmt->execute();
+            $registroExitoso = $stmt->execute();
 
-           
+
 
             // Cerrar la sentencia
             $stmt->close();
@@ -130,32 +140,33 @@ class Usuario
 
 
     }
-    public function actualizarUsuarioConImagen ($nombre, $apellido, $email, $pass, $idUsuario, $foto){
-         // Crear conexión utilizando el patrón Singleton
-         $conexion = Conexion::getConnection();
-        
-         // Validación de datos y sentencia preparada para actualización
-         $sql = "UPDATE usuario SET nombre = ?, apellido = ?, email = ?, pass = ?, foto = ? WHERE idUsuario = ?";
-         $stmt = $conexion->prepare($sql);
- 
-         // Verificar si la preparación de la consulta fue exitosa
-         if ($stmt) {
-             // Vincular parámetros
-             $stmt->bind_param("sssssi", $nombre, $apellido, $email, $pass, $foto, $idUsuario);
-;
+    public function actualizarUsuarioConImagen($nombre, $apellido, $email, $pass, $idUsuario, $foto)
+    {
+        // Crear conexión utilizando el patrón Singleton
+        $conexion = Conexion::getConnection();
 
-             
-             // Ejecutar la consulta
-             $registroExitoso =$stmt->execute();
- 
+        // Validación de datos y sentencia preparada para actualización
+        $sql = "UPDATE usuario SET nombre = ?, apellido = ?, email = ?, pass = ?, foto = ? WHERE idUsuario = ?";
+        $stmt = $conexion->prepare($sql);
+
+        // Verificar si la preparación de la consulta fue exitosa
+        if ($stmt) {
+            // Vincular parámetros
+            $stmt->bind_param("sssssi", $nombre, $apellido, $email, $pass, $foto, $idUsuario);
             
- 
-             // Cerrar la sentencia
-             $stmt->close();
-         } else {
-             echo "Error al preparar la consulta.";
-         }
- 
-         return $registroExitoso;
+
+
+            // Ejecutar la consulta
+            $registroExitoso = $stmt->execute();
+
+
+
+            // Cerrar la sentencia
+            $stmt->close();
+        } else {
+            echo "Error al preparar la consulta.";
+        }
+
+        return $registroExitoso;
     }
 }

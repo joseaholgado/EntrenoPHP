@@ -1,14 +1,17 @@
 body {
     background-color: #010101;
-   
+
 }
-.header{
+
+.header {
     font-family: 'Outfif', sans-serif;
     text-align: center;
 }
-h2{
-    color:#FFA500;
+
+h2 {
+    color: #FFA500;
 }
+
 .container {
     padding: 10%;
     display: flex;
@@ -19,9 +22,10 @@ label {
     height: 80%;
     width: 80%;
     color: white;
-    
+
 }
-.form-control{
+
+.form-control {
     border: 3px solid #FFA500;
 }
 
@@ -29,7 +33,7 @@ label {
 .col {
     width: 30%;
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     /* padding-bottom: 2%; */
 }
 
@@ -38,7 +42,7 @@ label {
     border: 1px solid #FFA500;
     color: white;
     font-weight: bold;
-    
+
 }
 
 .btn:hover {
@@ -47,10 +51,11 @@ label {
     color: #010101;
 }
 
-a{
+a {
     text-decoration: none;
     color: inherit;
 }
+
 .img {
     margin-left: 20%;
     height: 20%;
@@ -58,11 +63,11 @@ a{
 }
 
 img {
-    
-        width: 140%;
-    }
-    .alerta {
-        padding-top: 3%;
-        /* Resto de tus estilos personalizados */
-    }
-    
+
+    width: 140%;
+}
+
+.alerta {
+    padding-top: 3%;
+    /* Resto de tus estilos personalizados */
+}
