@@ -120,9 +120,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idUsuario`, `email`, `pass`, `nombre`, `apellido`, `foto`) VALUES
-(1, 'bruce@wayne.com', '2c65c8d7bfbca32a3ed42596192384f6', 'Bruce', 'Wayne', NULL),
-(2, 'selina@kyle.com', 'e99d7ed5580193f36a51f597bc2c0210', 'Selina', 'Kyle', NULL),
-(3, 'jose@jose.com', '1234', 'Jose', 'Bonet', NULL);
+(1, 'jose@prueba.com', 'prueba', '$2y$10$MjW5SzYG8duxBEwUWEN4.uMGPVZN1QtAFU/G18aydkvu8RtoMQS46', 'prueba', NULL);
 
 
 --
