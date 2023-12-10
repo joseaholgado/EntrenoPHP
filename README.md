@@ -70,17 +70,20 @@ Teniendo en cuenta que se empleo el script SQL adjunto para crear y poblar la ba
 4. Para crear un nuevo usuario se debe realizar desde el formulario de registro `/registro` y para logearse desde el formulario de login en `/login`.
 
 5. El listado principal de todos los musculos se encuentra en `/main` mientras que el listado de los ejercicios individuales se encuentra en `/mainEjercicios`. Por otra parte, desde el nav hay un despliegue de todos los músculos para acceder más rápidamente desde cualquier para dentro de la pagina.
+   
 ![Alt text](image-1.png)
 
-6. Es posible ver la descripcion de un ejercicio en concreto pinchando en `+info`. 
+7. Es posible ver la descripcion de un ejercicio en concreto pinchando en `+info`.
+   
 ![Alt text](image-2.png)
 
-7. Para editar los datos del usuario se emplean en el nav justo al pinchar en su nombre llamado `modificar usuario`.
+9. Para editar los datos del usuario se emplean en el nav justo al pinchar en su nombre llamado `modificar usuario`.
+    
 ![Alt text](image-3.png)
 
-8. Puedes cerrar la sesión del usuario (se muestra en la imagen anterior)
+11. Puedes cerrar la sesión del usuario (se muestra en la imagen anterior)
 
-9. Al clicklar encima de inicio te reedirige al main (la muestra de todos los músculos)
+12. Al clicklar encima de inicio te reedirige al main (la muestra de todos los músculos)
 
 
 
