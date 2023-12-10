@@ -144,7 +144,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idUsuario`, `email`, `pass`, `nombre`, `apellido`, `foto`) VALUES
-(1, 'jose@prueba.com', 'prueba', '$2y$10$MjW5SzYG8duxBEwUWEN4.uMGPVZN1QtAFU/G18aydkvu8RtoMQS46', 'prueba', NULL);
+(1, 'jose@prueba.com', '$2y$10$MjW5SzYG8duxBEwUWEN4.uMGPVZN1QtAFU/G18aydkvu8RtoMQS46', 'jose', 'prueba', NULL);
 
 
 --
@@ -164,6 +164,9 @@ CREATE TABLE `administrador` (
 --
 -- Índices para tablas volcadas
 --
+
+INSERT INTO `administrador` (`idUsuario`, `email`, `pass`, `nombre`, `apellido`, `foto`) VALUES
+(1, 'admin@prueba.com', '$2y$10$MjW5SzYG8duxBEwUWEN4.uMGPVZN1QtAFU/G18aydkvu8RtoMQS46', 'admin', 'pruebote', NULL);
 
 --
 -- Indices de la tabla `entrenamiento`
