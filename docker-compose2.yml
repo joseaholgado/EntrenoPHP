@@ -1,0 +1,36 @@
+version: '3'
+services:
+
+  servidor2:
+    build: .
+    image: 'php:8.2-apache-buster'
+    container_name: contenedor_servidor2
+    volumes:
+      - ./html:/var/www/html
+    ports:
+      - '83:83'
+    links:
+      - dbEntrenamiento:database
+
+  dbEntrenamiento:
+    image: 'mysql:latest'
+    container_name: contenedor_dbEntrenamiento
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    
+    environment:
+       MYSQL_DATABASE: entrenamientos
+       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes' 
+
+    ports:
+      - '3307:3307'
+
+  phpmyadmin2:
+    image: 'phpmyadmin:latest'
+    container_name: proyecto_Entrenamiento
+    restart: always
+    environment:
+      PMA_HOST: dbEntrenamiento
+      PAM_USER: root
+    ports:
+      - '8002:80'
